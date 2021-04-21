@@ -12,18 +12,18 @@ class Login extends React.Component {
   }
   render() {
     return (
-      <View>
+      <View style={{ flex: 1, alignItems: 'center' ,backgroundColor:"white"}}>
         <Text style={styles.header}>Welcome</Text>
         <View style={styles.textInputWrapper}>
           <TextInput style={styles.textInput} onChangeText={(username) => this.setState({ username })} value={this.state.username} placeholder="Username" placeholderTextColor="grey" />
-          <TextInput style={styles.textInput} onChangeText={(password) => this.setState({ password })} value={this.state.password} placeholder="Password" placeholderTextColor="grey" />
+          <TextInput secureTextEntry={true} style={styles.textInput} onChangeText={(password) => this.setState({ password })} value={this.state.password} placeholder="Password" placeholderTextColor="grey" />
         </View>
         <View style={styles.buttonWrapper}>
           <TouchableOpacity style={styles.button}>
             <Text style={styles.buttonText}>Login</Text>
           </TouchableOpacity>
           <Text style={styles.orText}>or</Text>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Register')}>
             <Text style={styles.buttonText}>Register</Text>
           </TouchableOpacity>
         </View>

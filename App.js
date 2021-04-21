@@ -1,14 +1,15 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import Login from "./components/all/LoginPage.jsx";
+import { NavigationContainer } from '@react-navigation/native';
+import Router from "./Router/index"
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <StatusBar style="auto" />
-      <Login />
-    </View>
+    <NavigationContainer>
+         <StatusBar style="auto" />
+          <Router/>
+    </NavigationContainer>
   );
 }
 
