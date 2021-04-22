@@ -12,26 +12,32 @@ class Login extends React.Component {
   }
   render() {
     return (
-      <View style={{ flex: 1, alignItems: 'center' ,backgroundColor:"white"}}>
-        <Text style={styles.header}>Welcome</Text>
-        <View style={styles.textInputWrapper}>
-          <TextInput style={styles.textInput} onChangeText={(username) => this.setState({ username })} value={this.state.username} placeholder="Username" placeholderTextColor="grey" />
-          <TextInput secureTextEntry={true} style={styles.textInput} onChangeText={(password) => this.setState({ password })} value={this.state.password} placeholder="Password" placeholderTextColor="grey" />
+      <ScrollView style={{ backgroundColor: "white" }}>
+        <View style={styles.container}>
+          <Text style={styles.header}>Welcome</Text>
+          <View style={styles.textInputWrapper}>
+            <TextInput style={styles.textInput} onChangeText={(username) => this.setState({ username })} value={this.state.username} placeholder="Username" placeholderTextColor="grey" />
+            <TextInput secureTextEntry={true} style={styles.textInput} onChangeText={(password) => this.setState({ password })} value={this.state.password} placeholder="Password" placeholderTextColor="grey" />
+          </View>
+          <View style={styles.buttonWrapper}>
+            <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("HomeCustomer")}>
+              <Text style={styles.buttonText}>Login</Text>
+            </TouchableOpacity>
+            <Text style={styles.orText}>or</Text>
+            <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("Register")}>
+              <Text style={styles.buttonText}>Register</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-        <View style={styles.buttonWrapper}>
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}>Login</Text>
-          </TouchableOpacity>
-          <Text style={styles.orText}>or</Text>
-          <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Register')}>
-            <Text style={styles.buttonText}>Register</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
+      </ScrollView>
     );
   }
 }
 const styles = StyleSheet.create({
+  container: {
+    alignItems: "center",
+    paddingBottom: 50,
+  },
   header: {
     fontSize: 50,
     fontWeight: "bold",
