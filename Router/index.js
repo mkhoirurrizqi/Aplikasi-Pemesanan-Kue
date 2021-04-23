@@ -28,7 +28,7 @@ export default function Router() {
         ),
         headerRight: () => (
           <HeaderButtons HeaderButtonComponent={HeaderButton}>
-            <Item title="profile" iconName={"account"} onPress={() => navigation.navigate("Profile")} iconSize={30} />
+            <Item title="profile" iconName={"person-circle-outline"} onPress={() => navigation.navigate("Profile")} iconSize={30} />
           </HeaderButtons>
         ),
       })}
@@ -37,7 +37,7 @@ export default function Router() {
       <Stack.Screen name="Register" component={Register} options={{ title: "", headerRight: false }} />
       <Stack.Screen name="HomeCustomer" component={HomeCustomer} options={{ title: "", headerLeft: false }} />
       <Stack.Screen name="Profile" component={Profile} options={{ title: "", headerRight: false }} />
-      <Stack.Screen name="ListProduct" component={ListProduct} options= {{ title: "", headerLeft: true, headerRight: true}} />
+      <Stack.Screen name="ListProduct" component={ListProduct} options= {{ title: ""}} />
     </Stack.Navigator>
   );
 }

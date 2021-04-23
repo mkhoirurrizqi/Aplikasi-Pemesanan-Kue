@@ -19,7 +19,7 @@ class HomeCustomer extends React.Component {
                   <Text style={styles.storeAddress}>Tanjung Senang, Tanjung Senang</Text>
                 </View>
                 <View style={{ flex: 4, alignItems: "center", justifyContent: "center" }}>
-                  <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("")}>
+                  <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("ListProduct")}>
                     <Text style={styles.buttonText}>See Store</Text>
                   </TouchableOpacity>
                 </View>
@@ -35,7 +35,7 @@ class HomeCustomer extends React.Component {
                   <Text style={styles.storeAddress}>Way Kandis, Tanjung Senang</Text>
                 </View>
                 <View style={{ flex: 4, alignItems: "center", justifyContent: "center" }}>
-                  <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("")}>
+                  <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("ListProduct")}>
                     <Text style={styles.buttonText}>See Store</Text>
                   </TouchableOpacity>
                 </View>
