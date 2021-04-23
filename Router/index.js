@@ -6,7 +6,7 @@ import HeaderButton from "../components/header/HeaderButton";
 import Login from "../components/all/LoginPage";
 import Register from "../components/all/RegisterPage";
 import HomeCustomer from "../components/customer/HomeCustomer";
-import { Ionicons } from "@expo/vector-icons";
+import Profile from "../components/all/ProfilePage";
 
 const Stack = createStackNavigator();
 
@@ -27,7 +27,7 @@ export default function Router() {
         ),
         headerRight: () => (
           <HeaderButtons HeaderButtonComponent={HeaderButton}>
-            <Item title="profile" iconName={"person-circle-outline"} onPress={() => navigation.goBack()} iconSize={30} />
+            <Item title="profile" iconName={"person-circle-outline"} onPress={() => navigation.navigate("Profile")} iconSize={30} />
           </HeaderButtons>
         ),
       })}
@@ -35,6 +35,7 @@ export default function Router() {
       <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
       <Stack.Screen name="Register" component={Register} options={{ title: "", headerRight: false }} />
       <Stack.Screen name="HomeCustomer" component={HomeCustomer} options={{ title: "", headerLeft: false }} />
+      <Stack.Screen name="Profile" component={Profile} options={{ title: "", headerRight: false }} />
     </Stack.Navigator>
   );
 }

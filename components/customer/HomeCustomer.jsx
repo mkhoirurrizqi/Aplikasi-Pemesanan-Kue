@@ -81,11 +81,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: "bold",
   },
-  storeWazap: {
-    color: "#F57373",
-    fontSize: 13,
-    fontWeight: "bold",
-  },
   button: {
     backgroundColor: "#F57373",
     elevation: 8,
