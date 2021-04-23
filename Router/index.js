@@ -8,6 +8,7 @@ import Register from "../components/all/RegisterPage";
 import HomeCustomer from "../components/customer/HomeCustomer";
 import Profile from "../components/all/ProfilePage";
 import ListProduct from "../components/customer/ListProduct";
+import AddProduct from "../components/store/AddProduct";
 
 const Stack = createStackNavigator();
 
@@ -38,6 +39,7 @@ export default function Router() {
       <Stack.Screen name="HomeCustomer" component={HomeCustomer} options={{ title: "", headerLeft: false }} />
       <Stack.Screen name="Profile" component={Profile} options={{ title: "", headerRight: false }} />
       <Stack.Screen name="ListProduct" component={ListProduct} options= {{ title: ""}} />
+      <Stack.Screen name="AddProduct" component={AddProduct} options= {{ title: ""}} />
     </Stack.Navigator>
   );
 }
