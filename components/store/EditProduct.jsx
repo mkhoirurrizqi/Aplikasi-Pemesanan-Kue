@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity, Image, StatusBar, ToastAndroid } from "react-native";
 import DropDownPicker from 'react-native-dropdown-picker';
 
-class AddProduct extends React.Component {
+class EditProduct extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -52,7 +52,7 @@ class AddProduct extends React.Component {
             </View>
         <View style={styles.buttonWrapper}>
           <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('StoreProduct')}>
-            <Text style={styles.buttonText}>Add</Text>
+            <Text style={styles.buttonText}>Save</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -114,4 +114,4 @@ dropdownWrapper:{
   },
 });
 
-export default AddProduct;
+export default EditProduct;

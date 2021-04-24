@@ -3,13 +3,17 @@ import { StyleSheet, TouchableOpacity, Button, Text, View } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import HeaderButton from "../components/header/HeaderButton";
+import EditProfile from "../components/all/EditProfile"
 import Login from "../components/all/LoginPage";
 import Register from "../components/all/RegisterPage";
-import HomeCustomer from "../components/customer/HomeCustomer";
 import Profile from "../components/all/ProfilePage";
+import HomeCustomer from "../components/customer/HomeCustomer";
 import ListProduct from "../components/customer/ListProduct";
+import StoreProduct from "../components/store/ProductDetails"
 import AddProduct from "../components/store/AddProduct";
-import EditProfile from "../components/all/EditProfile"
+import EditProduct from "../components/store/EditProduct";
+
+
 
 const Stack = createStackNavigator();
 
@@ -43,11 +47,13 @@ export default function Router() {
     >
       <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
       <Stack.Screen name="Register" component={Register} options={{ title: "", headerRight: false }} />
-      <Stack.Screen name="EditProfile" component={EditProfile} options={{ title: "", headerRight: false }} />
       <Stack.Screen name="HomeCustomer" component={HomeCustomer} options={{ title: "", headerLeft: false }} />
       <Stack.Screen name="Profile" component={Profile} options={{ title: "", headerRight: false }} />
+      <Stack.Screen name="EditProfile" component={EditProfile} options={{ title: "", headerRight: false }} />
       <Stack.Screen name="ListProduct" component={ListProduct} options= {{ title: "List Product"}} />
-      <Stack.Screen name="AddProduct" component={AddProduct} options= {{ title: ""}} />
+      <Stack.Screen name="StoreProduct" component={StoreProduct} options= {{ title: "Toko Joko"}} />
+      <Stack.Screen name="AddProduct" component={AddProduct} options= {{ title: "Add Product"}} />
+      <Stack.Screen name="EditProduct" component={EditProduct} options= {{ title: "Edit Product"}} />
     </Stack.Navigator>
   );
 }

@@ -2,12 +2,11 @@ import React from "react";
 import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity, Image, StatusBar, ToastAndroid } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-class ListProduct extends React.Component {
+class StoreProduct extends React.Component {
   render() {
     return (
       <ScrollView style={{ backgroundColor: "white" }}>
         <View style={styles.container}>
-        <Text style={styles.header}>Toko Joko</Text>
           <View style={styles.allProduct}>
             <View style={styles.product}>
               <View style={styles.content}>
@@ -17,8 +16,8 @@ class ListProduct extends React.Component {
                 <View style={{ flex: 7, justifyContent: "center" }}>
                   <Text style={styles.CakeName}>Kaastengels </Text>
                 </View>
-                <View style={{ flex: 4, alignItems: "center", justifyContent: "center" }}>
-                  <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("")}>
+                <View style={{ flex: 7, alignItems: "center", justifyContent: "center" ,flexDirection: "row", }}>
+                  <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("EditProduct")}>
                     <Text style={styles.buttonText}>Edit</Text>
                   </TouchableOpacity>
                   <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("")}>
@@ -35,8 +34,8 @@ class ListProduct extends React.Component {
                 <View style={{ flex: 7, justifyContent: "center" }}>
                   <Text style={styles.CakeName}>Putri Salju</Text>
                 </View>
-                <View style={{ flex: 4, alignItems: "center", justifyContent: "center" }}>
-                  <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("")}>
+                <View style={{ flex: 7, alignItems: "center", justifyContent: "center" ,flexDirection: "row", }}>
+                  <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("EditProduct")}>
                     <Text style={styles.buttonText}>Edit</Text>
                   </TouchableOpacity>
                   <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("")}>
@@ -53,8 +52,8 @@ class ListProduct extends React.Component {
                 <View style={{ flex: 7, justifyContent: "center" }}>
                   <Text style={styles.CakeName}>Nastar</Text>
                 </View>
-                <View style={{ flex: 4, alignItems: "center", justifyContent: "center" }}>
-                  <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("")}>
+                <View style={{ flex: 7, alignItems: "center", justifyContent: "center" ,flexDirection: "row", }}>
+                  <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("EditProduct")}>
                     <Text style={styles.buttonText}>Edit</Text>
                   </TouchableOpacity>
                   <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("")}>
@@ -71,8 +70,8 @@ class ListProduct extends React.Component {
                 <View style={{ flex: 7, justifyContent: "center" }}>
                   <Text style={styles.CakeName}>Choco Chips &ensp;</Text>
                 </View>
-                <View style={{ flex: 4, alignItems: "center", justifyContent: "center" }}>
-                  <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("")}>
+                <View style={{ flex: 7, alignItems: "center", justifyContent: "center" ,flexDirection: "row", }}>
+                  <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("EditProduct")}>
                     <Text style={styles.buttonText}>Edit</Text>
                   </TouchableOpacity>
                   <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("")}>
@@ -89,8 +88,8 @@ class ListProduct extends React.Component {
                 <View style={{ flex: 7, justifyContent: "center" }}>
                   <Text style={styles.CakeName}>Wafer Keju</Text>
                 </View>
-                <View style={{ flex: 4, alignItems: "center", justifyContent: "center" }}>
-                  <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("")}>
+                <View style={{ flex: 7, alignItems: "center", justifyContent: "center" ,flexDirection: "row", }}>
+                  <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("EditProduct")}>
                     <Text style={styles.buttonText}>Edit</Text>
                   </TouchableOpacity>
                   <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("")}>
@@ -107,8 +106,8 @@ class ListProduct extends React.Component {
                 <View style={{ flex: 7, justifyContent: "center" }}>
                   <Text style={styles.CakeName}>Sagu Keju</Text>
                 </View>
-                <View style={{ flex: 4, alignItems: "center", justifyContent: "center" }}>
-                  <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("")}>
+                <View style={{ flex: 7, alignItems: "center", justifyContent: "center" ,flexDirection: "row", }}>
+                  <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("EditProduct")}>
                     <Text style={styles.buttonText}>Edit</Text>
                   </TouchableOpacity>
                   <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("")}>
@@ -125,8 +124,8 @@ class ListProduct extends React.Component {
                 <View style={{ flex: 7, justifyContent: "center" }}>
                   <Text style={styles.CakeName1}>Legit</Text>
                 </View>
-                <View style={{ flex: 4, alignItems: "center", justifyContent: "center" }}>
-                  <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("")}>
+                <View style={{ flex: 7, alignItems: "center", justifyContent: "center" ,flexDirection: "row", }}>
+                  <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("EditProduct")}>
                     <Text style={styles.buttonText}>Edit</Text>
                   </TouchableOpacity>
                   <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("")}>
@@ -143,8 +142,8 @@ class ListProduct extends React.Component {
                 <View style={{ flex: 7, justifyContent: "center" }}>
                   <Text style={styles.CakeName1}>Engkak  &nbsp; &nbsp; </Text>
                 </View>
-                <View style={{ flex: 4, alignItems: "center", justifyContent: "center" }}>
-                  <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("")}>
+                <View style={{ flex: 7, alignItems: "center", justifyContent: "center" ,flexDirection: "row", }}>
+                  <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("EditProduct")}>
                     <Text style={styles.buttonText}>Edit</Text>
                   </TouchableOpacity>
                   <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("")}>
@@ -179,8 +178,8 @@ const styles = StyleSheet.create({
   product: {
     borderBottomWidth: 1,
     borderBottomColor: "black",
-    paddingBottom: 10,
-    paddingTop: 10,
+    paddingBottom: 15,
+    paddingTop: 15,
   },
   content: {
     flexDirection: "row",
@@ -223,6 +222,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     width: 70,
     alignSelf: "auto",
+    marginLeft:10
   },
   button1: {
     backgroundColor: "#808080",
@@ -253,4 +253,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ListProduct;
+export default StoreProduct;
