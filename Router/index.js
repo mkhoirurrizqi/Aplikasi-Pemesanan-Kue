@@ -9,6 +9,7 @@ import HomeCustomer from "../components/customer/HomeCustomer";
 import Profile from "../components/all/ProfilePage";
 import ListProduct from "../components/customer/ListProduct";
 import AddProduct from "../components/store/AddProduct";
+import EditProfile from "../components/all/EditProfile"
 
 const Stack = createStackNavigator();
 
@@ -24,7 +25,6 @@ export default function Router() {
         headerTitleStyle: {
           fontSize: 20,
           fontWeight: "bold",
-          marginTop: 10,
           alignSelf: "center",
           color: "#F57373",
         },
@@ -43,6 +43,7 @@ export default function Router() {
     >
       <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
       <Stack.Screen name="Register" component={Register} options={{ title: "", headerRight: false }} />
+      <Stack.Screen name="EditProfile" component={EditProfile} options={{ title: "", headerRight: false }} />
       <Stack.Screen name="HomeCustomer" component={HomeCustomer} options={{ title: "", headerLeft: false }} />
       <Stack.Screen name="Profile" component={Profile} options={{ title: "", headerRight: false }} />
       <Stack.Screen name="ListProduct" component={ListProduct} options= {{ title: "List Product"}} />

@@ -5,8 +5,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 
-class Profile extends React.Component {
-  render() {
+const Profile  = (props) => {
     return (
       <ScrollView style={{ backgroundColor: "white" }}>
         <View style={styles.container}>
@@ -15,7 +14,7 @@ class Profile extends React.Component {
           </View>
           <View style={styles.nameWrapper}>
             <Text style={styles.name}>Dodit Mulyanto</Text>
-            <Feather name="edit" size={15} color="#F57373" onPress={() => this.props.navigation.navigate("")} />
+            <Feather name="edit" size={15} color="#F57373" onPress={() => props.navigation.navigate("EditProfile")} />
           </View>
           <View style={styles.allRow}>
             <View style={styles.row}>
@@ -50,7 +49,7 @@ class Profile extends React.Component {
             </View>
           </View>
           <View style={styles.buttonWrapper}>
-            <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("Login")}>
+            <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("Login")}>
               <Text style={styles.buttonText}>Log Out</Text>
             </TouchableOpacity>
           </View>
@@ -58,7 +57,7 @@ class Profile extends React.Component {
       </ScrollView>
     );
   }
-}
+
 const styles = StyleSheet.create({
   container: {
     paddingBottom: 50,

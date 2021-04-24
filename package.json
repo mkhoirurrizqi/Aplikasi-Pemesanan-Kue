@@ -25,6 +25,7 @@
     "react-native-screens": "^2.15.2",
     "react-native-web": "~0.13.12",
     "react-navigation-header-buttons": "^7.0.1",
+    "react-number-format": "^4.5.5",
     "save": "^2.4.0"
   },
   "devDependencies": {

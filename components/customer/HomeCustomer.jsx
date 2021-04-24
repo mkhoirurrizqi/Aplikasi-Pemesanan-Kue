@@ -1,9 +1,10 @@
-import React from "react";
+import React,{useState} from "react";
 import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity, Image, StatusBar, ToastAndroid } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-class HomeCustomer extends React.Component {
-  render() {
+const HomeCustomer  = (props) => {
+  const [storeName, setStoreName] = useState("");
+  const [storeAddress, setStoreAddress] = useState("");
     return (
       <ScrollView style={{ backgroundColor: "white" }}>
         <View style={styles.container}>
@@ -19,7 +20,7 @@ class HomeCustomer extends React.Component {
                   <Text style={styles.storeAddress}>Tanjung Senang, Tanjung Senang</Text>
                 </View>
                 <View style={{ flex: 4, alignItems: "center", justifyContent: "center" }}>
-                  <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("ListProduct")}>
+                  <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("ListProduct")}>
                     <Text style={styles.buttonText}>See Store</Text>
                   </TouchableOpacity>
                 </View>
@@ -35,7 +36,7 @@ class HomeCustomer extends React.Component {
                   <Text style={styles.storeAddress}>Way Kandis, Tanjung Senang</Text>
                 </View>
                 <View style={{ flex: 4, alignItems: "center", justifyContent: "center" }}>
-                  <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("ListProduct")}>
+                  <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("ListProduct")}>
                     <Text style={styles.buttonText}>See Store</Text>
                   </TouchableOpacity>
                 </View>
@@ -46,7 +47,6 @@ class HomeCustomer extends React.Component {
       </ScrollView>
     );
   }
-}
 const styles = StyleSheet.create({
   container: {
     paddingBottom: 50,

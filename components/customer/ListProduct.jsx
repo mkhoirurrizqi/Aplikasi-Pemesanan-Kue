@@ -1,9 +1,23 @@
-import React from "react";
+import React,{useState} from "react";
 import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity, Image, StatusBar, ToastAndroid } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-
-class ListProduct extends React.Component {
-  render() {
+import NumberFormat from 'react-number-format';
+export function ReactNativeNumberFormat({ value }) {
+  return (
+    <NumberFormat
+      value={value}
+      displayType={'text'}
+      thousandSeparator={'.'} 
+      decimalSeparator={','}
+      prefix={'Rp. '}
+      renderText={formattedValue => <Text>{formattedValue}</Text>} 
+    />
+  );
+}
+const ListProduct  = (props) => {
+  const [cakename, setCakename] = useState("");
+  const [kindofcake, setKindofcake] = useState("");
+  const [price, setPrice] = useState("");
     return (
       <ScrollView style={{ backgroundColor: "white" }}>
         <View style={styles.container}>
@@ -16,10 +30,11 @@ class ListProduct extends React.Component {
                 <View style={{ flex: 7, justifyContent: "center" }}>
                   <Text style={styles.CakeName}>Kaastengels </Text>
                   <Text style={styles.KindOfCake}>Kue Kering</Text>
-                  <Text style={styles.Price}>Rp. 70.000</Text>
+                  <Text style={styles.Price}><ReactNativeNumberFormat value={70000} /></Text>
+                  
                 </View>
                 <View style={{ flex: 4, alignItems: "center", justifyContent: "center" }}>
-                  <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("")}>
+                  <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("")}>
                     <Text style={styles.buttonText}>See Product</Text>
                     </TouchableOpacity>
                     <Text style={styles.information}>Ready Stock</Text>
@@ -34,10 +49,10 @@ class ListProduct extends React.Component {
                 <View style={{ flex: 7, justifyContent: "center" }}>
                   <Text style={styles.CakeName}>Putri Salju</Text>
                   <Text style={styles.KindOfCake}>Kue Kering</Text>
-                  <Text style={styles.Price}>Rp. 50.000</Text>
+                  <Text style={styles.Price}><ReactNativeNumberFormat value={70000} /></Text>
                 </View>
                 <View style={{ flex: 4, alignItems: "center", justifyContent: "center" }}>
-                  <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("")}>
+                  <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("")}>
                     <Text style={styles.buttonText}>See Product</Text>
                     </TouchableOpacity>
                     <Text style={styles.information}>Ready Stock</Text>
@@ -52,10 +67,10 @@ class ListProduct extends React.Component {
                 <View style={{ flex: 7, justifyContent: "center" }}>
                   <Text style={styles.CakeName}>Nastar</Text>
                   <Text style={styles.KindOfCake}>Kue Kering</Text>
-                  <Text style={styles.Price}>Rp. 75.000</Text>
+                  <Text style={styles.Price}><ReactNativeNumberFormat value={70000} /></Text>
                 </View>
                 <View style={{ flex: 4, alignItems: "center", justifyContent: "center" }}>
-                  <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("")}>
+                  <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("")}>
                     <Text style={styles.buttonText}>See Product</Text>
                     </TouchableOpacity>
                     <Text style={styles.information}>Ready Stock</Text>
@@ -70,10 +85,10 @@ class ListProduct extends React.Component {
                 <View style={{ flex: 7, justifyContent: "center" }}>
                   <Text style={styles.CakeName}>Choco Chips &ensp;</Text>
                   <Text style={styles.KindOfCake}>Kue Kering</Text>
-                  <Text style={styles.Price}>Rp. 45.000</Text>
+                  <Text style={styles.Price}><ReactNativeNumberFormat value={70000} /></Text>
                 </View>
                 <View style={{ flex: 4, alignItems: "center", justifyContent: "center" }}>
-                  <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("")}>
+                  <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("")}>
                     <Text style={styles.buttonText}>See Product</Text>
                     </TouchableOpacity>
                     <Text style={styles.information}>Ready Stock</Text>
@@ -88,10 +103,10 @@ class ListProduct extends React.Component {
                 <View style={{ flex: 7, justifyContent: "center" }}>
                   <Text style={styles.CakeName}>Wafer Keju</Text>
                   <Text style={styles.KindOfCake}>Kue Kering</Text>
-                  <Text style={styles.Price}>Rp. 40.000</Text>
+                  <Text style={styles.Price}><ReactNativeNumberFormat value={70000} /></Text>
                 </View>
                 <View style={{ flex: 4, alignItems: "center", justifyContent: "center" }}>
-                  <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("")}>
+                  <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("")}>
                     <Text style={styles.buttonText}>See Product</Text>
                     </TouchableOpacity>
                     <Text style={styles.information}>Ready Stock</Text>
@@ -106,10 +121,10 @@ class ListProduct extends React.Component {
                 <View style={{ flex: 7, justifyContent: "center" }}>
                   <Text style={styles.CakeName}>Sagu Keju</Text>
                   <Text style={styles.KindOfCake}>Kue Kering</Text>
-                  <Text style={styles.Price}>Rp. 60.000</Text>
+                  <Text style={styles.Price}><ReactNativeNumberFormat value={70000} /></Text>
                 </View>
                 <View style={{ flex: 4, alignItems: "center", justifyContent: "center" }}>
-                  <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("")}>
+                  <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("")}>
                     <Text style={styles.buttonText}>See Product</Text>
                     </TouchableOpacity>
                     <Text style={styles.information}>Ready Stock</Text>
@@ -124,10 +139,10 @@ class ListProduct extends React.Component {
                 <View style={{ flex: 7, justifyContent: "center" }}>
                   <Text style={styles.CakeName1}>Legit</Text>
                   <Text style={styles.KindOfCake1}>Kue Basah</Text>
-                  <Text style={styles.Price1}>Rp. 120.000</Text>
+                  <Text style={styles.Price1}><ReactNativeNumberFormat value={70000} /></Text>
                 </View>
                 <View style={{ flex: 4, alignItems: "center", justifyContent: "center" }}>
-                  <TouchableOpacity style={styles.button1} onPress={() => this.props.navigation.navigate("")}>
+                  <TouchableOpacity style={styles.button1} onPress={() => props.navigation.navigate("")}>
                     <Text style={styles.buttonText}>See Product</Text>
                     </TouchableOpacity>
                     <Text style={styles.information1}>Out Of Stock</Text>
@@ -142,10 +157,10 @@ class ListProduct extends React.Component {
                 <View style={{ flex: 7, justifyContent: "center" }}>
                   <Text style={styles.CakeName1}>Engkak  &nbsp; &nbsp; </Text>
                   <Text style={styles.KindOfCake1}>Kue Basah</Text>
-                  <Text style={styles.Price1}>Rp. 90.000</Text>
+                  <Text style={styles.Price1}><ReactNativeNumberFormat value={70000} /></Text>
                 </View>
                 <View style={{ flex: 4, alignItems: "center", justifyContent: "center" }}>
-                  <TouchableOpacity style={styles.button1} onPress={() => this.props.navigation.navigate("")}>
+                  <TouchableOpacity style={styles.button1} onPress={() => props.navigation.navigate("")}>
                     <Text style={styles.buttonText}>See Product</Text>
                     </TouchableOpacity>
                     <Text style={styles.information1}>Out Of Stock</Text>
@@ -157,7 +172,7 @@ class ListProduct extends React.Component {
       </ScrollView>
     );
 }
-}
+
 
 const styles = StyleSheet.create({
   container: {

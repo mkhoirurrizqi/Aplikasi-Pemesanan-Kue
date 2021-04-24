@@ -43,7 +43,7 @@ const Register  = (props) => {
           <TextInput secureTextEntry={true} style={styles.textInput} onChangeText={(Confirm_password) => setConfirm_pasword( Confirm_password )} value={confirm_password} placeholder="Confirmation Password" placeholderTextColor="grey" />
         </View>
         <View style={styles.buttonWrapper}>
-          <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate('Register')}>
+          <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate('Login')}>
             <Text style={styles.buttonText}>Register</Text>
           </TouchableOpacity>
         </View>
