@@ -3,6 +3,7 @@ import { StyleSheet, TouchableOpacity, Button, Text, View } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import HeaderButton from "../components/header/HeaderButton";
+import Splash from "../splash/splash"
 import EditProfile from "../components/all/EditProfile"
 import Login from "../components/all/LoginPage";
 import Register from "../components/all/RegisterPage";
@@ -20,7 +21,7 @@ const Stack = createStackNavigator();
 export default function Router() {
   return (
     <Stack.Navigator
-      initialRouteName="Login"
+      initialRouteName="Splash"
       screenOptions={({ route, navigation }) => ({
         headerStyle: {
           elevation: 0,
@@ -45,6 +46,7 @@ export default function Router() {
         ), 
       })}
     >
+      <Stack.Screen name="Splash" component={Splash} options={{ headerShown: false }} />
       <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
       <Stack.Screen name="Register" component={Register} options={{ title: "", headerRight: false }} />
       <Stack.Screen name="HomeCustomer" component={HomeCustomer} options={{ title: "", headerLeft: false }} />
