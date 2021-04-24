@@ -1,30 +1,23 @@
-import React from "react";
+import React,{useState} from "react";
 import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity, Image, StatusBar, ToastAndroid } from "react-native";
 
-class Login extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      noteArray: [],
-      username: "",
-      password: "",
-    };
-  }
-  render() {
+const Login  = (props) => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
     return (
       <ScrollView style={{ backgroundColor: "white" }}>
         <View style={styles.container}>
           <Text style={styles.header}>Welcome</Text>
           <View style={styles.textInputWrapper}>
-            <TextInput style={styles.textInput} onChangeText={(username) => this.setState({ username })} value={this.state.username} placeholder="Username" placeholderTextColor="grey" />
-            <TextInput secureTextEntry={true} style={styles.textInput} onChangeText={(password) => this.setState({ password })} value={this.state.password} placeholder="Password" placeholderTextColor="grey" />
+            <TextInput style={styles.textInput} onChangeText={(username) => setUsername( username )} value={username} placeholder="Username" placeholderTextColor="grey" />
+            <TextInput secureTextEntry={true} style={styles.textInput} onChangeText={(password) => setPassword( password )} value={password} placeholder="Password" placeholderTextColor="grey" />
           </View>
           <View style={styles.buttonWrapper}>
-            <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("HomeCustomer")}>
+            <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("HomeCustomer")}>
               <Text style={styles.buttonText}>Login</Text>
             </TouchableOpacity>
             <Text style={styles.orText}>or</Text>
-            <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("Register")}>
+            <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("Register")}>
               <Text style={styles.buttonText}>Register</Text>
             </TouchableOpacity>
           </View>
@@ -32,7 +25,6 @@ class Login extends React.Component {
       </ScrollView>
     );
   }
-}
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",

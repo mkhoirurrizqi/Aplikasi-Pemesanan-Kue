@@ -1,6 +1,5 @@
 import React from "react";
 import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity, Image, StatusBar, ToastAndroid } from "react-native";
-import DropDownPicker from 'react-native-dropdown-picker';
 
 class EditProfile extends React.Component {
   constructor(props) {

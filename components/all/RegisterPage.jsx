@@ -1,25 +1,17 @@
-import React from "react";
+import React,{useState} from "react";
 import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity, Image, StatusBar, ToastAndroid } from "react-native";
 import DropDownPicker from 'react-native-dropdown-picker';
+const Register  = (props) => {
+  const [role, setRole] = useState("");
+  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
+  const [whatsapp, setWhatsapp] = useState("");
+  const [email, setEmail] = useState("");
+  const [kecamatan, setKecamatan] = useState("");
+  const [kelurahan, setKelurahan] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirm_password, setConfirm_pasword] = useState("");
 
-class Register extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      noteArray: [],
-      role: "",
-      name: "",
-      username: "",
-      whatsapp: "",
-      Email: "",
-      Kecamatan: "",
-      kelurahan: "",
-      password: "",
-      Confirm_password: "",
-      
-    };
-  }
-  render() {
     return (
       <ScrollView >
         <View style={{ flex: 1, alignItems: 'center' ,backgroundColor:"white"}}>
@@ -38,22 +30,20 @@ class Register extends React.Component {
                  justifyContent: 'flex-start'
             }}
             dropDownStyle={{backgroundColor: "white"}}
-            onChangeItem={item => this.setState({
-                role: item.value
-            })}
+            onChangeItem={item => setRole(...role,item.value)}
             />
             </View>
-          <TextInput style={styles.textInput} onChangeText={(name) => this.setState({ name })} value={this.state.name} placeholder="Name" placeholderTextColor="grey" />
-          <TextInput style={styles.textInput} onChangeText={(username) => this.setState({ username })} value={this.state.username} placeholder="Username" placeholderTextColor="grey" />
-          <TextInput keyboardType="numeric" style={styles.textInput} onChangeText={(whatsapp) => this.setState({ whatsapp })} value={this.state.whatsapp} placeholder="Whatsapp" placeholderTextColor="grey" />
-          <TextInput style={styles.textInput} onChangeText={(Email) => this.setState({ Email })} value={this.state.Email} placeholder="Email" placeholderTextColor="grey" />
-          <TextInput style={styles.textInput} onChangeText={(Kecamatan) => this.setState({ Kecamatan })} value={this.state.Kecamatan} placeholder="Kecamatan" placeholderTextColor="grey" />
-          <TextInput style={styles.textInput} onChangeText={(kelurahan) => this.setState({ kelurahan })} value={this.state.kelurahan} placeholder="Kelurahan" placeholderTextColor="grey" />
-          <TextInput secureTextEntry={true} style={styles.textInput} onChangeText={(password) => this.setState({ password })} value={this.state.password} placeholder="Password" placeholderTextColor="grey" />
-          <TextInput secureTextEntry={true} style={styles.textInput} onChangeText={(Confirm_password) => this.setState({ Confirm_password })} value={this.state.Confirm_password} placeholder="Confirmation Password" placeholderTextColor="grey" />
+          <TextInput style={styles.textInput} onChangeText={(name) => setName( name )} value={name} placeholder="Name" placeholderTextColor="grey" />
+          <TextInput style={styles.textInput} onChangeText={(username) => setUsername( username )} value={username} placeholder="Username" placeholderTextColor="grey" />
+          <TextInput keyboardType="numeric" style={styles.textInput} onChangeText={(whatsapp) => setWhatsapp( whatsapp )} value={whatsapp} placeholder="Whatsapp" placeholderTextColor="grey" />
+          <TextInput style={styles.textInput} onChangeText={(Email) => setEmail( Email )} value={email} placeholder="Email" placeholderTextColor="grey" />
+          <TextInput style={styles.textInput} onChangeText={(Kecamatan) => setKecamatan( Kecamatan )} value={kecamatan} placeholder="Kecamatan" placeholderTextColor="grey" />
+          <TextInput style={styles.textInput} onChangeText={(kelurahan) => setKelurahan( kelurahan )} value={kelurahan} placeholder="Kelurahan" placeholderTextColor="grey" />
+          <TextInput secureTextEntry={true} style={styles.textInput} onChangeText={(password) => setPassword( password )} value={password} placeholder="Password" placeholderTextColor="grey" />
+          <TextInput secureTextEntry={true} style={styles.textInput} onChangeText={(Confirm_password) => setConfirm_pasword( Confirm_password )} value={confirm_password} placeholder="Confirmation Password" placeholderTextColor="grey" />
         </View>
         <View style={styles.buttonWrapper}>
-          <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Register')}>
+          <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate('Register')}>
             <Text style={styles.buttonText}>Register</Text>
           </TouchableOpacity>
         </View>
@@ -61,7 +51,7 @@ class Register extends React.Component {
       </ScrollView>
     );
   }
-}
+
 const styles = StyleSheet.create({
 dropdownWrapper:{
     width: 200,

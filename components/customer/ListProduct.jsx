@@ -7,7 +7,6 @@ class ListProduct extends React.Component {
     return (
       <ScrollView style={{ backgroundColor: "white" }}>
         <View style={styles.container}>
-        <Text style={styles.header}>List Product</Text>
           <View style={styles.allProduct}>
             <View style={styles.product}>
               <View style={styles.content}>
@@ -163,13 +162,6 @@ class ListProduct extends React.Component {
 const styles = StyleSheet.create({
   container: {
     paddingBottom: 50,
-  },
-  header: {
-    fontSize: 20,
-    fontWeight: "bold",
-    marginTop: 10,
-    alignSelf: "center",
-    color: "#F57373",
   },
   allProduct: {
     marginLeft: 5,

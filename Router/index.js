@@ -21,6 +21,13 @@ export default function Router() {
           elevation: 0,
           shadowOpacity: 0,
         },
+        headerTitleStyle: {
+          fontSize: 20,
+          fontWeight: "bold",
+          marginTop: 10,
+          alignSelf: "center",
+          color: "#F57373",
+        },
         // headerTransparent: true,
         headerLeft: () => (
           <HeaderButtons HeaderButtonComponent={HeaderButton}>
@@ -31,14 +38,14 @@ export default function Router() {
           <HeaderButtons HeaderButtonComponent={HeaderButton}>
             <Item title="profile" iconName={"person-circle-outline"} onPress={() => navigation.navigate("Profile")} iconSize={30} />
           </HeaderButtons>
-        ),
+        ), 
       })}
     >
       <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
       <Stack.Screen name="Register" component={Register} options={{ title: "", headerRight: false }} />
       <Stack.Screen name="HomeCustomer" component={HomeCustomer} options={{ title: "", headerLeft: false }} />
       <Stack.Screen name="Profile" component={Profile} options={{ title: "", headerRight: false }} />
-      <Stack.Screen name="ListProduct" component={ListProduct} options= {{ title: ""}} />
+      <Stack.Screen name="ListProduct" component={ListProduct} options= {{ title: "List Product"}} />
       <Stack.Screen name="AddProduct" component={AddProduct} options= {{ title: ""}} />
     </Stack.Navigator>
   );
