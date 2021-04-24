@@ -9,7 +9,7 @@ const Splash = ({navigation}) => {
     },[navigation]);
     return (
         <View style={styles.container}>
-            <TouchableOpacity style={styles.container} onPress={() => navigation.navigate("Login")}>
+            <TouchableOpacity style={styles.container} onPress={() => navigation.replace("Login")}>
             <Text style={styles.text}>PAMPARAMPAM</Text>
             <Text style={styles.text1}>Aplikasi Pemesanan kue</Text>
         </TouchableOpacity>
