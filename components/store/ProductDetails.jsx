@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   CakeName1: {
-    color: "#808080",
+    color: "#F57373",
     fontSize: 17,
     fontWeight: "bold",
   },
