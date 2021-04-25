@@ -38,7 +38,6 @@ const styles = StyleSheet.create({
   photo: {
       width: 300,
       height: 150,
-      source: "center",
       alignSelf: "center",
       marginHorizontal: 'auto',
       marginVertical: 25,

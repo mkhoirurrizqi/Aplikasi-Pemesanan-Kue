@@ -34,7 +34,7 @@ const ListProduct  = (props) => {
                   
                 </View>
                 <View style={{ flex: 4, alignItems: "center", justifyContent: "center" }}>
-                  <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("DetailsProduct")}>
+                  <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("DetailProduct")}>
                     <Text style={styles.buttonText}>See Product</Text>
                     </TouchableOpacity>
                     <Text style={styles.information}>Ready Stock</Text>
