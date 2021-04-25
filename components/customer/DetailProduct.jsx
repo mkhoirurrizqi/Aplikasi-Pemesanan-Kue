@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity, Image, StatusBar, ToastAndroid } from "react-native";
 
-const DetailsProduct  = (props) => {
+const DetailProduct  = (props) => {
     return (
       <ScrollView style={{ backgroundColor: "white" }}>
         <View style={styles.container}>
@@ -93,4 +93,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default DetailsProduct;
+export default DetailProduct;
