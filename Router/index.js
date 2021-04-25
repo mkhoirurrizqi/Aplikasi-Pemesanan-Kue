@@ -13,8 +13,7 @@ import ListProduct from "../components/customer/ListProduct";
 import StoreProduct from "../components/store/ProductDetails"
 import AddProduct from "../components/store/AddProduct";
 import EditProduct from "../components/store/EditProduct";
-
-
+import OrderPage from "../components/customer/OrderPage";
 
 const Stack = createStackNavigator();
 
@@ -56,6 +55,7 @@ export default function Router() {
       <Stack.Screen name="StoreProduct" component={StoreProduct} options= {{ title: "Toko Joko"}} />
       <Stack.Screen name="AddProduct" component={AddProduct} options= {{ title: "Add Product"}} />
       <Stack.Screen name="EditProduct" component={EditProduct} options= {{ title: "Edit Product"}} />
+      <Stack.Screen name="OrderPage" component={OrderPage} options= {{ title: "Order Here"}} />
     </Stack.Navigator>
   );
 }
