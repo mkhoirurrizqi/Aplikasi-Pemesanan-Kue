@@ -28,13 +28,13 @@ const ListProduct  = (props) => {
                   <MaterialCommunityIcons name="cake" size={30} color={"#F57373"} />
                 </View>
                 <View style={{ flex: 7, justifyContent: "center" }}>
-                  <Text style={styles.CakeName}>Kaastengels </Text>
+                  <Text style={styles.CakeName}>Nastar </Text>
                   <Text style={styles.KindOfCake}>Kue Kering</Text>
-                  <Text style={styles.Price}><ReactNativeNumberFormat value={70000} /></Text>
+                  <Text style={styles.Price}><ReactNativeNumberFormat value={75000} /></Text>
                   
                 </View>
                 <View style={{ flex: 4, alignItems: "center", justifyContent: "center" }}>
-                  <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("")}>
+                  <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("DetailsProduct")}>
                     <Text style={styles.buttonText}>See Product</Text>
                     </TouchableOpacity>
                     <Text style={styles.information}>Ready Stock</Text>
@@ -65,7 +65,7 @@ const ListProduct  = (props) => {
                   <MaterialCommunityIcons name="cake" size={30} color={"#F57373"} />
                 </View>
                 <View style={{ flex: 7, justifyContent: "center" }}>
-                  <Text style={styles.CakeName}>Nastar</Text>
+                  <Text style={styles.CakeName}>Kaastangels</Text>
                   <Text style={styles.KindOfCake}>Kue Kering</Text>
                   <Text style={styles.Price}><ReactNativeNumberFormat value={70000} /></Text>
                 </View>
