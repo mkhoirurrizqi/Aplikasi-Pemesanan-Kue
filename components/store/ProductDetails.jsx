@@ -9,6 +9,11 @@ class StoreProduct extends React.Component {
         <View style={styles.container}>
           <View style={styles.allProduct}>
             <View style={styles.product}>
+              <View style={styles.button2}>
+                <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("AddProduct")}>
+                    <Text style={styles.buttonText}>Add</Text>
+                </TouchableOpacity>
+              </View>
               <View style={styles.content}>
                 <View style={{ flex: 2, alignItems: "center", justifyContent: "center" }}>
                   <MaterialCommunityIcons name="cake" size={30} color={"#F57373"} />
@@ -222,7 +227,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     width: 70,
     alignSelf: "auto",
-    marginLeft:10
+    marginLeft:10,
   },
   button1: {
     backgroundColor: "#808080",
@@ -232,6 +237,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     width: 70,
     alignSelf: "auto",
+  },
+  button2: {
+    paddingBottom: 15,
   },
   buttonText: {
     alignSelf: "center",

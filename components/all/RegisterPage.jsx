@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React,{useState} from "react";
 import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity, Image, StatusBar, ToastAndroid } from "react-native";
-import DropDownPicker from "react-native-dropdown-picker";
-const Register = (props) => {
+import DropDownPicker from 'react-native-dropdown-picker';
+const Register  = (props) => {
   const [role, setRole] = useState("");
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
@@ -12,51 +12,51 @@ const Register = (props) => {
   const [password, setPassword] = useState("");
   const [confirm_password, setConfirm_pasword] = useState("");
 
-  return (
-    <ScrollView>
-      <View style={{ flex: 1, alignItems: "center", backgroundColor: "white" }}>
+    return (
+      <ScrollView >
+        <View style={{ flex: 1, alignItems: 'center' ,backgroundColor:"white"}}>
         <Text style={styles.header}>Register</Text>
         <View style={styles.textInputWrapper}>
-          <View style={styles.dropdownWrapper}>
-            <DropDownPicker
-              placeholder="Account type"
-              items={[
-                { label: "Store", value: "Store" },
-                { label: "Costumer", value: "Costumer" },
-              ]}
-              containerStyle={{ height: 40 }}
-              style={{ backgroundColor: "white" }}
-              itemStyle={{
-                justifyContent: "flex-start",
-              }}
-              dropDownStyle={{ backgroundColor: "white" }}
-              onChangeItem={(item) => setRole(...role, item.value)}
+        <View style={styles.dropdownWrapper}>
+        <DropDownPicker 
+            placeholder="Account type"
+            items={[
+                {label: 'Store', value: 'Store'},
+                {label: 'Costumer', value: 'Costumer'},
+             ]}
+            containerStyle={{height: 40}}
+            style={{backgroundColor: "white"}}
+            itemStyle={{
+                 justifyContent: 'flex-start'
+            }}
+            dropDownStyle={{backgroundColor: "white"}}
+            onChangeItem={item => setRole(...role,item.value)}
             />
-          </View>
-          <TextInput style={styles.textInput} onChangeText={(name) => setName(name)} value={name} placeholder="Name" placeholderTextColor="grey" />
-          <TextInput style={styles.textInput} onChangeText={(username) => setUsername(username)} value={username} placeholder="Username" placeholderTextColor="grey" />
-          <TextInput keyboardType="numeric" style={styles.textInput} onChangeText={(whatsapp) => setWhatsapp(whatsapp)} value={whatsapp} placeholder="Whatsapp" placeholderTextColor="grey" />
-          <TextInput style={styles.textInput} onChangeText={(Email) => setEmail(Email)} value={email} placeholder="Email" placeholderTextColor="grey" />
-          <TextInput style={styles.textInput} onChangeText={(Kecamatan) => setKecamatan(Kecamatan)} value={kecamatan} placeholder="Kecamatan" placeholderTextColor="grey" />
-          <TextInput style={styles.textInput} onChangeText={(kelurahan) => setKelurahan(kelurahan)} value={kelurahan} placeholder="Kelurahan" placeholderTextColor="grey" />
-          <TextInput secureTextEntry={true} style={styles.textInput} onChangeText={(password) => setPassword(password)} value={password} placeholder="Password" placeholderTextColor="grey" />
-          <TextInput secureTextEntry={true} style={styles.textInput} onChangeText={(Confirm_password) => setConfirm_pasword(Confirm_password)} value={confirm_password} placeholder="Confirmation Password" placeholderTextColor="grey" />
+            </View>
+          <TextInput style={styles.textInput} onChangeText={(name) => setName( name )} value={name} placeholder="Name" placeholderTextColor="grey" />
+          <TextInput style={styles.textInput} onChangeText={(username) => setUsername( username )} value={username} placeholder="Username" placeholderTextColor="grey" />
+          <TextInput keyboardType="numeric" style={styles.textInput} onChangeText={(whatsapp) => setWhatsapp( whatsapp )} value={whatsapp} placeholder="Whatsapp" placeholderTextColor="grey" />
+          <TextInput style={styles.textInput} onChangeText={(Email) => setEmail( Email )} value={email} placeholder="Email" placeholderTextColor="grey" />
+          <TextInput style={styles.textInput} onChangeText={(Kecamatan) => setKecamatan( Kecamatan )} value={kecamatan} placeholder="Kecamatan" placeholderTextColor="grey" />
+          <TextInput style={styles.textInput} onChangeText={(kelurahan) => setKelurahan( kelurahan )} value={kelurahan} placeholder="Kelurahan" placeholderTextColor="grey" />
+          <TextInput secureTextEntry={true} style={styles.textInput} onChangeText={(password) => setPassword( password )} value={password} placeholder="Password" placeholderTextColor="grey" />
+          <TextInput secureTextEntry={true} style={styles.textInput} onChangeText={(Confirm_password) => setConfirm_pasword( Confirm_password )} value={confirm_password} placeholder="Confirmation Password" placeholderTextColor="grey" />
         </View>
         <View style={styles.buttonWrapper}>
-          <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("StoreProduct")}>
+          <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate('StoreProduct')}>   
             <Text style={styles.buttonText}>Register</Text>
           </TouchableOpacity>
         </View>
       </View>
-    </ScrollView>
-  );
-};
+      </ScrollView>
+    );
+  }
 
 const styles = StyleSheet.create({
-  dropdownWrapper: {
+dropdownWrapper:{
     width: 200,
     alignSelf: "flex-start",
-  },
+},
   header: {
     fontSize: 40,
     fontWeight: "bold",
