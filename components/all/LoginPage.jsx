@@ -4,7 +4,35 @@ import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity, Image,
 const Login  = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  
+  const loginpost =() => {
+    console.log("halooo");
+    fetch('https://pamparampam.herokuapp.com/api/login', {
+        method: 'POST',
+        headers: {
+                  Accept: 'application/json',
+                'Content-Type': 'application/json'
+                },
+        body: JSON.stringify({
+            email: username,
+            password: password,
+            device_name:'mobile'
+          })
+        })
+        .then((response) => {
+          if (response.status === 201) {
+            return response.json()
+          } else {
+            throw new Error('Something went wrong on api server!');
+          }
+        })
+        .then((responseJson) => {
+          console.log(responseJson);
+          props.navigation.navigate("HomeCustomer")
+        }).catch(error => {
+        console.error(error);
+      });
+      
+  };
     return (
       <ScrollView style={{ backgroundColor: "white" }}>
         <View style={styles.container}>
@@ -14,7 +42,8 @@ const Login  = (props) => {
             <TextInput secureTextEntry={true} style={styles.textInput} onChangeText={(password) => setPassword( password )} value={password} placeholder="Password" placeholderTextColor="grey" />
           </View>
           <View style={styles.buttonWrapper}>
-            <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("HomeCustomer")}>
+            {/* <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("HomeCustomer")}> */}
+            <TouchableOpacity style={styles.button} onPress={loginpost}>
               <Text style={styles.buttonText}>Login</Text>
             </TouchableOpacity>
             <Text style={styles.orText}>or</Text>
