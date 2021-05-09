@@ -1,5 +1,5 @@
 import React,{useState} from "react";
-import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity, Image, StatusBar, ToastAndroid } from "react-native";
+import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity, Alert,Image, StatusBar, ToastAndroid } from "react-native";
 import DropDownPicker from 'react-native-dropdown-picker';
 const Register  = (props) => {
   const [role, setRole] = useState("");
@@ -11,7 +11,44 @@ const Register  = (props) => {
   const [kelurahan, setKelurahan] = useState("");
   const [password, setPassword] = useState("");
   const [confirm_password, setConfirm_pasword] = useState("");
-
+  const registerpost =() => {
+    if(password != confirm_password){
+      Alert.alert('Password dan Re-password tidak sama');
+    }else{
+    fetch('https://pamparampam.herokuapp.com/api/register', {
+        method: 'POST',
+        headers: {
+                  Accept: 'application/json',
+                'Content-Type': 'application/json'
+                },
+        body: JSON.stringify({
+          type : role,
+          name : name,
+          username : username,
+          whatsapp : whatsapp,
+          email : email,
+          kecamatan : kecamatan,
+          kelurahan : kelurahan,
+          password : password,   
+          })
+        })
+        .then((response) => {
+          if (response.status === 201) {
+            return response.json()
+          } else {
+            Alert.alert('Registrasi Gagal');
+            throw new Error('Something went wrong on api server!');
+          }
+        })
+        .then((responseJson) => {
+          console.log(responseJson);
+            props.navigation.navigate("Login")
+        }).catch(error => {
+        console.error(error);
+      });
+      
+    }
+  };
     return (
       <ScrollView >
         <View style={{ flex: 1, alignItems: 'center' ,backgroundColor:"white"}}>
@@ -43,7 +80,7 @@ const Register  = (props) => {
           <TextInput secureTextEntry={true} style={styles.textInput} onChangeText={(Confirm_password) => setConfirm_pasword( Confirm_password )} value={confirm_password} placeholder="Confirmation Password" placeholderTextColor="grey" />
         </View>
         <View style={styles.buttonWrapper}>
-          <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate('StoreProduct')}>   
+          <TouchableOpacity style={styles.button} onPress={registerpost}>   
             <Text style={styles.buttonText}>Register</Text>
           </TouchableOpacity>
         </View>

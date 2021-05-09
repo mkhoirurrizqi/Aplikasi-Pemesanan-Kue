@@ -1,11 +1,13 @@
 import React,{useState} from "react";
-import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity, Image, StatusBar, ToastAndroid } from "react-native";
-
+import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity,Alert, Image, StatusBar, ToastAndroid } from "react-native";
+import { tokenuser} from '../redux/action';
+import { useDispatch} from 'react-redux';
 const Login  = (props) => {
+  const dispatch = useDispatch();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [token, setToken] = useState("");
   const loginpost =() => {
-    console.log("halooo");
     fetch('https://pamparampam.herokuapp.com/api/login', {
         method: 'POST',
         headers: {
@@ -13,7 +15,7 @@ const Login  = (props) => {
                 'Content-Type': 'application/json'
                 },
         body: JSON.stringify({
-            email: username,
+            username: username,
             password: password,
             device_name:'mobile'
           })
@@ -22,12 +24,19 @@ const Login  = (props) => {
           if (response.status === 201) {
             return response.json()
           } else {
+            Alert.alert('Login Gagal');
             throw new Error('Something went wrong on api server!');
           }
         })
         .then((responseJson) => {
-          console.log(responseJson);
-          props.navigation.navigate("HomeCustomer")
+          console.log(responseJson.token);
+          setToken(responseJson.token);
+          dispatch(tokenuser(responseJson.token))
+          if(responseJson.type == 'toko'){
+            props.navigation.navigate('StoreProduct')
+          }else{
+            props.navigation.navigate("HomeCustomer")
+          }
         }).catch(error => {
         console.error(error);
       });

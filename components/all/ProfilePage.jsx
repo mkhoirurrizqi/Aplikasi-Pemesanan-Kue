@@ -1,11 +1,38 @@
-import React from "react";
+import React, { useState,useEffect } from "react";
 import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity, Image, StatusBar, ToastAndroid } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
+import {  useSelector } from 'react-redux';
 
 const Profile  = (props) => {
+  const token = useSelector(data => data.token);
+  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
+  const [whatsapp, setWhatsapp] = useState("");
+  const [email, setEmail] = useState("");
+  useEffect(() => {
+    fetch('https://pamparampam.herokuapp.com/api/user',{
+      method:'GET',
+      headers: {
+        Accept: 'application/json',
+        'Authorization': 'Bearer ' + token,
+      'Content-Type': 'application/json'
+      },
+    })  
+    .then(function(response) {
+      return response.json()
+    }).then((responseJson) => {
+      console.log(responseJson); 
+      setName(responseJson.name);
+      setUsername(responseJson.username);
+      setWhatsapp(responseJson.whatsapp);
+      setEmail(responseJson.email);
+    }).catch(error => {
+      console.error(error);
+    });
+},[]);
     return (
       <ScrollView style={{ backgroundColor: "white" }}>
         <View style={styles.container}>
@@ -13,7 +40,7 @@ const Profile  = (props) => {
             <Ionicons name="md-person-circle-outline" size={240} color="#F57373" />
           </View>
           <View style={styles.nameWrapper}>
-            <Text style={styles.name}>Dodit Mulyanto</Text>
+            <Text style={styles.name}>{name}</Text>
             <Feather name="edit" size={15} color="#F57373" onPress={() => props.navigation.navigate("EditProfile")} />
           </View>
           <View style={styles.allRow}>
@@ -23,7 +50,7 @@ const Profile  = (props) => {
                   <MaterialCommunityIcons name="email-outline" size={25} color={"#F57373"} />
                 </View>
                 <View style={{ paddingLeft: 10, justifyContent: "center" }}>
-                  <Text style={styles.teks}>doditmulyanto@student.itera.ac.id</Text>
+                  <Text style={styles.teks}>{email}</Text>
                 </View>
               </View>
             </View>
@@ -33,7 +60,7 @@ const Profile  = (props) => {
                   <Ionicons name="md-person" size={25} color="#F57373" />
                 </View>
                 <View style={{ paddingLeft: 10, justifyContent: "center" }}>
-                  <Text style={styles.teks}>doditmul99</Text>
+                  <Text style={styles.teks}>{username}</Text>
                 </View>
               </View>
             </View>
@@ -43,7 +70,7 @@ const Profile  = (props) => {
                   <FontAwesome name="whatsapp" size={25} color="#F57373" />
                 </View>
                 <View style={{ paddingLeft: 13, justifyContent: "center" }}>
-                  <Text style={styles.teks}>089790742003</Text>
+                  <Text style={styles.teks}>{whatsapp}</Text>
                 </View>
               </View>
             </View>
