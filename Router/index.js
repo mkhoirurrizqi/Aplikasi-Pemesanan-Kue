@@ -3,14 +3,14 @@ import { StyleSheet, TouchableOpacity, Button, Text, View } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import HeaderButton from "../components/header/HeaderButton";
-import Splash from "../splash/splash"
-import EditProfile from "../components/all/EditProfile"
+import Splash from "../splash/splash";
+import EditProfile from "../components/all/EditProfile";
 import Login from "../components/all/LoginPage";
 import Register from "../components/all/RegisterPage";
 import Profile from "../components/all/ProfilePage";
 import HomeCustomer from "../components/customer/HomeCustomer";
 import ListProduct from "../components/customer/ListProduct";
-import StoreProduct from "../components/store/ProductDetails"
+import StoreProduct from "../components/store/ProductDetails";
 import AddProduct from "../components/store/AddProduct";
 import EditProduct from "../components/store/EditProduct";
 import OrderPage from "../components/customer/OrderPage";
@@ -43,7 +43,7 @@ export default function Router() {
           <HeaderButtons HeaderButtonComponent={HeaderButton}>
             <Item title="profile" iconName={"person-circle-outline"} onPress={() => navigation.navigate("Profile")} iconSize={30} />
           </HeaderButtons>
-        ), 
+        ),
       })}
     >
       <Stack.Screen name="Splash" component={Splash} options={{ headerShown: false }} />
@@ -52,12 +52,12 @@ export default function Router() {
       <Stack.Screen name="HomeCustomer" component={HomeCustomer} options={{ title: "", headerLeft: false }} />
       <Stack.Screen name="Profile" component={Profile} options={{ title: "", headerRight: false }} />
       <Stack.Screen name="EditProfile" component={EditProfile} options={{ title: "", headerRight: false }} />
-      <Stack.Screen name="ListProduct" component={ListProduct} options= {{ title: "List Product"}} />
-      <Stack.Screen name="StoreProduct" component={StoreProduct} options= {{ title: "Toko Joko"}} />
-      <Stack.Screen name="AddProduct" component={AddProduct} options= {{ title: "Add Product"}} />
-      <Stack.Screen name="EditProduct" component={EditProduct} options= {{ title: "Edit Product"}} />
-      <Stack.Screen name="OrderPage" component={OrderPage} options= {{ title: "Order Here"}} />
-      <Stack.Screen name="DetailProduct" component={DetailProduct} options= {{ title: "Detail Product"}} />
+      <Stack.Screen name="ListProduct" component={ListProduct} options={{ title: "List Product" }} />
+      <Stack.Screen name="StoreProduct" component={StoreProduct} options={{ title: "", headerLeft: false }} />
+      <Stack.Screen name="AddProduct" component={AddProduct} options={{ title: "Add Product" }} />
+      <Stack.Screen name="EditProduct" component={EditProduct} options={{ title: "Edit Product" }} />
+      <Stack.Screen name="OrderPage" component={OrderPage} options={{ title: "Order Here" }} />
+      <Stack.Screen name="DetailProduct" component={DetailProduct} options={{ title: "Detail Product" }} />
     </Stack.Navigator>
   );
 }

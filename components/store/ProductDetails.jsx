@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
 const StoreProduct = (props) => {
   const token = useSelector((data) => data.user.token);
-  const [productName, setProductName] = useState([]);
+  // const [productName, setProductName] = useState([]);
   const [productArray, setProductArray] = useState([]);
   const id = useSelector((data) => data.user.id);
   useEffect(() => {
@@ -24,40 +24,64 @@ const StoreProduct = (props) => {
         return response.json();
       })
       .then((responseJson) => {
-        setProductName([]);
-        // if (productName.length <= responseJson.length) {
+        // setProductName([]);
+        // // if (productName.length <= responseJson.length) {
+        // responseJson.forEach((element) => {
+        //   setProductName((productName) => [...productName, element.pd_name]);
+        // });
+        setProductArray([]);
         responseJson.forEach((element) => {
-          setProductName((productName) => [...productName, element.pd_name]);
+          setProductArray((productArray) => [
+            ...productArray,
+            {
+              id: element.id,
+              name: element.pd_name,
+            },
+          ]);
         });
         // // }
         // console.log(productName);
         console.log(responseJson);
         console.log(id);
-        console.log(productName);
+        // console.log(productName);
+        console.log(productArray);
       })
       .catch((error) => {
         console.error(error);
       });
   }, []);
 
-  // if (id) {
-  //   fetch("https://pamparampam.herokuapp.com/api/storeproduct", {
-  //     method: "POST",
-  //     headers: {
-  //       Accept: "application/json",
-  //       Authorization: "Bearer " + token,
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({
-  //       user_id: id,
-  //     }),
-  //   })
-  //     .then((response) => response.json())
-  //     .then((responseJson) => {})
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // }
+  const deleteProduct = (productId) => {
+    fetch("https://pamparampam.herokuapp.com/api/user", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
+      },
+      body: {
+        id: productId,
+      },
+    }).then((response) => {
+      if (response.status === 200) {
+        toastDeleteSucceed();
+        return response.json();
+      } else {
+        toastDeleteFailed();
+        console.log("gagal");
+      }
+    });
+    console.log("coba");
+    console.log(productId);
+  };
+
+  const toastDeleteFailed = () => {
+    ToastAndroid.show("Data Gagal Dihapus", ToastAndroid.SHORT);
+  };
+
+  const toastDeleteSucceed = () => {
+    ToastAndroid.show("Data Berhasil Dihapus", ToastAndroid.SHORT);
+  };
 
   return (
     <ScrollView style={{ backgroundColor: "white" }}>
@@ -68,7 +92,7 @@ const StoreProduct = (props) => {
               <Text style={styles.buttonText}>Add</Text>
             </TouchableOpacity>
           </View>
-          {productName.map((product) => {
+          {/* {productName.map((product) => {
             return (
               <View style={styles.product}>
                 <View style={styles.content}>
@@ -83,6 +107,35 @@ const StoreProduct = (props) => {
                       <Text style={styles.buttonText}>Edit</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("")}>
+                      <Text style={styles.buttonText}>Delete</Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              </View>
+            );
+          })} */}
+          {productArray.map((product, i) => {
+            return (
+              <View style={styles.product} key={i}>
+                <View style={styles.content}>
+                  <View style={{ flex: 2, alignItems: "center", justifyContent: "center" }}>
+                    <MaterialCommunityIcons name="cake" size={30} color={"#F57373"} />
+                  </View>
+                  <View style={{ flex: 7, justifyContent: "center" }}>
+                    <Text style={styles.CakeName}>{product.name}</Text>
+                  </View>
+                  <View style={{ flex: 7, alignItems: "center", justifyContent: "center", flexDirection: "row" }}>
+                    <TouchableOpacity
+                      style={styles.button}
+                      onPress={() =>
+                        props.navigation.navigate("EditProduct", {
+                          productId: product.id,
+                        })
+                      }
+                    >
+                      <Text style={styles.buttonText}>Edit</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.button} onPress={() => deleteProduct(product.id)}>
                       <Text style={styles.buttonText}>Delete</Text>
                     </TouchableOpacity>
                   </View>

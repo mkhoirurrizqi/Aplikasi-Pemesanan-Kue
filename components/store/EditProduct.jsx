@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity, Image, StatusBar, ToastAndroid } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
+import { useSelector } from "react-redux";
 
 const EditProduct = (props) => {
-  const [role, setRole] = useState("");
+  const token = useSelector((data) => data.user.token);
+  const [status, setStatus] = useState("");
   const [productName, setProductName] = useState("");
   const [price, setPrice] = useState("");
   const [weight, setWeight] = useState("");
@@ -11,6 +13,39 @@ const EditProduct = (props) => {
   const [expired, setExpired] = useState("");
   const [deskripsi, setDeskripsi] = useState("");
   const [photo, setPhoto] = useState("");
+  const { productId } = props.route.params;
+
+  useEffect(() => {
+    fetch("https://pamparampam.herokuapp.com/api/productdetail", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: productId,
+      }),
+    })
+      .then(function (response) {
+        return response.json();
+      })
+      .then((responseJson) => {
+        console.log("laman edit");
+        console.log(responseJson);
+        setProductName(responseJson.pd_name);
+        setPrice(responseJson.pd_harga);
+        setWeight(responseJson.pd_berat);
+        setJenis(responseJson.pd_jenis);
+        setExpired(responseJson.pd_expired);
+        setDeskripsi(responseJson.pd_desc);
+        setPhoto(responseJson.pd_img);
+        setStatus(responseJson.pd_status);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   return (
     <ScrollView style={{ backgroundColor: "white" }}>
@@ -37,7 +72,8 @@ const EditProduct = (props) => {
                 justifyContent: "flex-start",
               }}
               dropDownStyle={{ backgroundColor: "white" }}
-              onChangeItem={(item) => setRole(...role, item.value)}
+              onChangeItem={(item) => setStatus(...status, item.value)}
+              defaultValue={status}
             />
           </View>
         </View>
