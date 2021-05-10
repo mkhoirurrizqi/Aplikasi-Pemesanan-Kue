@@ -4,6 +4,7 @@ import {  useSelector } from 'react-redux';
 
 const EditProfile = (props) => {
   const token = useSelector(data => data.token);
+  const [id, setId] = useState(0);
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
@@ -26,6 +27,7 @@ const EditProfile = (props) => {
         return response.json()
       }).then((responseJson) => {
         console.log(responseJson); 
+        setId(responseJson.id);
         setName(responseJson.name);
         setUsername(responseJson.username);
         setWhatsapp(responseJson.whatsapp);
@@ -48,6 +50,7 @@ const EditProfile = (props) => {
                 'Content-Type': 'application/json'
                 },
         body: JSON.stringify({
+          id: id,
           name : name,
           username :username,
           whatsapp :whatsapp,
@@ -58,10 +61,11 @@ const EditProfile = (props) => {
           })
         })
         .then((response) => {
-          if (response.status === 201) {
+          if (response.status === 200) {
+            Alert.alert('Edit Profile Berhasil');
             return response.json()
           } else {
-            Alert.alert('Registrasi Gagal');
+            Alert.alert('Edit Profile Gagal');
             throw new Error('Something went wrong on api server!');
           }
         })

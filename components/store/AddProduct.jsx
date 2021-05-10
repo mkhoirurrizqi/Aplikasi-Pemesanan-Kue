@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity, Image, StatusBar, ToastAndroid } from "react-native";
+import { StyleSheet, Text, View, Alert,TextInput, ScrollView, TouchableOpacity, Image, StatusBar, ToastAndroid } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
+import {  useSelector } from 'react-redux';
 
 const AddProduct = (props) => {
-  const [role, setRole] = useState("");
+  const token = useSelector(data => data.token);
+  const [status, setStatus] = useState("");
   const [productName, setProductName] = useState("");
   const [price, setPrice] = useState("");
   const [weight, setWeight] = useState("");
@@ -11,6 +13,43 @@ const AddProduct = (props) => {
   const [expired, setExpired] = useState("");
   const [deskripsi, setDeskripsi] = useState("");
   const [photo, setPhoto] = useState("");
+  const addproductpost =() => {
+  
+    fetch('https://pamparampam.herokuapp.com/api/addproduct', {
+        method: 'POST',
+        headers: {
+                  Accept: 'application/json',
+                  'Authorization': 'Bearer ' + token,
+                'Content-Type': 'application/json'
+                },
+        body: JSON.stringify({
+          pd_img: photo,
+          pd_name: productName,
+          pd_harga: price,
+          pd_berat: weight,
+          pd_expired: expired,
+          pd_jenis: jenis,
+          pd_desc: deskripsi,
+          pd_status: status
+          })
+        })
+        .then((response) => {
+          if (response.status === 201) {
+            return response.json()
+          } else {
+            Alert.alert('AddProduct Gagal');
+            throw new Error('Something went wrong on api server!');
+          }
+        })
+        .then((responseJson) => {
+          console.log(responseJson);
+          props.navigation.navigate("StoreProduct")
+        }).catch(error => {
+        console.error(error);
+      });
+      
+   
+  };
   return (
     <ScrollView style={{ backgroundColor: "white" }}>
       <View style={{ flex: 1, alignItems: "center", paddingBottom: 50 }}>
@@ -36,12 +75,12 @@ const AddProduct = (props) => {
                 justifyContent: "flex-start",
               }}
               dropDownStyle={{ backgroundColor: "white" }}
-              onChangeItem={(item) => setRole(...role, item.value)}
+              onChangeItem={(item) => setStatus(...status, item.value)}
             />
           </View>
         </View>
         <View style={styles.buttonWrapper}>
-          <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("StoreProduct")}>
+          <TouchableOpacity style={styles.button} onPress={addproductpost}>
             <Text style={styles.buttonText}>Add</Text>
           </TouchableOpacity>
         </View>

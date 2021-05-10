@@ -1,12 +1,13 @@
 import React, { useState,useEffect } from "react";
-import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity, Image, StatusBar, ToastAndroid } from "react-native";
+import { StyleSheet, Text, View, Alert,TextInput, ScrollView, TouchableOpacity, Image, StatusBar, ToastAndroid } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
-import {  useSelector } from 'react-redux';
+import {  useSelector,useDispatch } from 'react-redux';
 
 const Profile  = (props) => {
+  const dispatch = useDispatch();
   const token = useSelector(data => data.token);
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
@@ -33,6 +34,31 @@ const Profile  = (props) => {
       console.error(error);
     });
 },[]);
+
+const logoutpost =() => {
+  fetch('https://pamparampam.herokuapp.com/api/logout', {
+      method: 'POST',
+      headers: {
+                Accept: 'application/json',
+                'Authorization': 'Bearer ' + token,
+              'Content-Type': 'application/json'
+              },
+      body: JSON.stringify({
+          token: token
+        })
+      })
+      .then((response) => {
+        if (response.status === 200) {
+          dispatch(tokenuser(""))
+          props.navigation.navigate("Login")
+          return response.json()
+        } else {
+          Alert.alert('Logout Gagal');
+          throw new Error('Something went wrong on api server!');
+        }
+      })
+    
+};
     return (
       <ScrollView style={{ backgroundColor: "white" }}>
         <View style={styles.container}>
@@ -76,7 +102,7 @@ const Profile  = (props) => {
             </View>
           </View>
           <View style={styles.buttonWrapper}>
-            <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("Login")}>
+            <TouchableOpacity style={styles.button} onPress={logoutpost}>
               <Text style={styles.buttonText}>Log Out</Text>
             </TouchableOpacity>
           </View>

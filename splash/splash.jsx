@@ -1,11 +1,40 @@
-import React,{useEffect} from "react"
+import React, { useState,useEffect } from "react";
 import { StyleSheet, Text, View , TouchableOpacity} from 'react-native'
+import {  useSelector } from 'react-redux';
 
 const Splash = ({navigation}) => {
+    const token = useSelector(data => data.token);
+    const [type, setType] = useState("");
     useEffect(()=>{
+        if(token != ""){
+        fetch('https://pamparampam.herokuapp.com/api/user',{
+                    method:'GET',
+                    headers: {
+                      Accept: 'application/json',
+                      'Authorization': 'Bearer ' + token,
+                    'Content-Type': 'application/json'
+                    },
+                  })  
+                  .then(function(response) {
+                    return response.json()
+                  }).then((responseJson) => {
+                      setType(responseJson.type)
+                  }).catch(error => {
+                    console.error(error);
+                  });
+                }
         setTimeout(()=>{
-            navigation.navigate('Login')
-        },2000)
+            console.log(token);
+            if(token == ""){
+                navigation.navigate('Login')
+            }else{
+                if(type == 'toko'){
+                    props.navigation.navigate('StoreProduct')
+                  }else{
+                    props.navigation.navigate("HomeCustomer")
+                  } 
+        }
+        },4000)
     },[navigation]);
     return (
         <View style={styles.container}>

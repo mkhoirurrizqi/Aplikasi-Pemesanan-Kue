@@ -58,8 +58,8 @@ const Register  = (props) => {
         <DropDownPicker 
             placeholder="Account type"
             items={[
-                {label: 'Store', value: 'Store'},
-                {label: 'Costumer', value: 'Costumer'},
+                {label: 'Store', value: 'toko'},
+                {label: 'Costumer', value: 'costumer'},
              ]}
             containerStyle={{height: 40}}
             style={{backgroundColor: "white"}}
