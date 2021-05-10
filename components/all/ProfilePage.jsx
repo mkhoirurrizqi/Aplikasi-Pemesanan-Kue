@@ -5,10 +5,12 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import {  useSelector,useDispatch } from 'react-redux';
+import { tokeniduser} from '../redux/action';
 
 const Profile  = (props) => {
   const dispatch = useDispatch();
-  const token = useSelector(data => data.token);
+  const token = useSelector(data => data.user.token);
+  const id = useSelector(data => data.user.id);
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
@@ -25,7 +27,7 @@ const Profile  = (props) => {
     .then(function(response) {
       return response.json()
     }).then((responseJson) => {
-      console.log(responseJson); 
+      console.log(id); 
       setName(responseJson.name);
       setUsername(responseJson.username);
       setWhatsapp(responseJson.whatsapp);
@@ -49,7 +51,7 @@ const logoutpost =() => {
       })
       .then((response) => {
         if (response.status === 200) {
-          dispatch(tokenuser(""))
+          dispatch(tokeniduser("",""))
           props.navigation.navigate("Login")
           return response.json()
         } else {

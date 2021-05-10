@@ -1,13 +1,13 @@
-import { TOKEN } from './tipe'
+import { USERIDTOKEN} from './tipe'
 
 const initData = {
-    token:""
+    token:"",
+    id:""
 }
-export const reducertoken = (state = initData, action) => {
+export const reduceridtoken = (state = initData, action) => {
     switch(action.type){
-        case TOKEN:
-            console.log('Token');
-            return {...state,token:action.data}
+        case USERIDTOKEN:
+            return {...state,user:action.data}
         default:return state;
     }
 }

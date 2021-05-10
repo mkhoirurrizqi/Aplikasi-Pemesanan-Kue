@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity, Alert,
 import {  useSelector } from 'react-redux';
 
 const EditProfile = (props) => {
-  const token = useSelector(data => data.token);
+  const token = useSelector(data => data.user.token);
   const [id, setId] = useState(0);
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");

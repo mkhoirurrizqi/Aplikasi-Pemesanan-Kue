@@ -4,7 +4,7 @@ import DropDownPicker from "react-native-dropdown-picker";
 import {  useSelector } from 'react-redux';
 
 const AddProduct = (props) => {
-  const token = useSelector(data => data.token);
+  const token = useSelector(data => data.user.token);
   const [status, setStatus] = useState("");
   const [productName, setProductName] = useState("");
   const [price, setPrice] = useState("");
@@ -116,8 +116,8 @@ const styles = StyleSheet.create({
   },
   buttonWrapper: {
     width: 350,
-    marginTop: 30,
-    marginBottom: 40,
+    marginTop: 60,
+    marginBottom: 30,
   },
   button: {
     backgroundColor: "#F57373",

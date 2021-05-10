@@ -1,6 +1,6 @@
 import React,{useState} from "react";
 import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity,Alert, Image, StatusBar, ToastAndroid } from "react-native";
-import { tokenuser} from '../redux/action';
+import { tokeniduser} from '../redux/action';
 import { useDispatch} from 'react-redux';
 const Login  = (props) => {
   const dispatch = useDispatch();
@@ -31,7 +31,7 @@ const Login  = (props) => {
         .then((responseJson) => {
           console.log(responseJson.token);
           setToken(responseJson.token);
-          dispatch(tokenuser(responseJson.token))
+          dispatch(tokeniduser(responseJson.token,responseJson.user.id))
           if(responseJson.type == 'toko'){
             props.navigation.navigate('StoreProduct')
           }else{

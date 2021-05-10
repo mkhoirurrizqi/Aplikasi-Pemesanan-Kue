@@ -1,4 +1,4 @@
 import {createStore} from 'redux'
-import {reducertoken} from './reducer'
-const storeState = createStore(reducertoken);
+import {reduceridtoken} from './reducer'
+const storeState = createStore(reduceridtoken);
 export default storeState;

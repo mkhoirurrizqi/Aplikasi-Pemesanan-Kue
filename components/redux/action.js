@@ -1,6 +1,6 @@
-import { TOKEN } from './tipe'
+import { USERIDTOKEN} from './tipe'
 
-export const tokenuser = (token) => ({
-    type:TOKEN,
-    data:token
+export const tokeniduser = (token,id) => ({
+    type:USERIDTOKEN,
+    data:{token,id},
 })
