@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 
 const StoreProduct = (props) => {
   const token = useSelector((data) => data.user.token);
-  // const [productName, setProductName] = useState([]);
   const [productArray, setProductArray] = useState([]);
   const id = useSelector((data) => data.user.id);
   useEffect(() => {
@@ -24,11 +23,6 @@ const StoreProduct = (props) => {
         return response.json();
       })
       .then((responseJson) => {
-        // setProductName([]);
-        // // if (productName.length <= responseJson.length) {
-        // responseJson.forEach((element) => {
-        //   setProductName((productName) => [...productName, element.pd_name]);
-        // });
         setProductArray([]);
         responseJson.forEach((element) => {
           setProductArray((productArray) => [
@@ -39,11 +33,8 @@ const StoreProduct = (props) => {
             },
           ]);
         });
-        // // }
-        // console.log(productName);
         console.log(responseJson);
         console.log(id);
-        // console.log(productName);
         console.log(productArray);
       })
       .catch((error) => {
@@ -52,7 +43,7 @@ const StoreProduct = (props) => {
   }, []);
 
   const deleteProduct = (productId) => {
-    fetch("https://pamparampam.herokuapp.com/api/user", {
+    fetch("https://pamparampam.herokuapp.com/api/deleteproduct", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -69,6 +60,7 @@ const StoreProduct = (props) => {
       } else {
         toastDeleteFailed();
         console.log("gagal");
+        console.log(response.status);
       }
     });
     console.log("coba");
@@ -83,6 +75,8 @@ const StoreProduct = (props) => {
     ToastAndroid.show("Data Berhasil Dihapus", ToastAndroid.SHORT);
   };
 
+  const refresh = () => {};
+
   return (
     <ScrollView style={{ backgroundColor: "white" }}>
       <View style={styles.container}>
@@ -92,28 +86,6 @@ const StoreProduct = (props) => {
               <Text style={styles.buttonText}>Add</Text>
             </TouchableOpacity>
           </View>
-          {/* {productName.map((product) => {
-            return (
-              <View style={styles.product}>
-                <View style={styles.content}>
-                  <View style={{ flex: 2, alignItems: "center", justifyContent: "center" }}>
-                    <MaterialCommunityIcons name="cake" size={30} color={"#F57373"} />
-                  </View>
-                  <View style={{ flex: 7, justifyContent: "center" }}>
-                    <Text style={styles.CakeName}>{product}</Text>
-                  </View>
-                  <View style={{ flex: 7, alignItems: "center", justifyContent: "center", flexDirection: "row" }}>
-                    <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("EditProduct")}>
-                      <Text style={styles.buttonText}>Edit</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("")}>
-                      <Text style={styles.buttonText}>Delete</Text>
-                    </TouchableOpacity>
-                  </View>
-                </View>
-              </View>
-            );
-          })} */}
           {productArray.map((product, i) => {
             return (
               <View style={styles.product} key={i}>
@@ -148,12 +120,6 @@ const StoreProduct = (props) => {
     </ScrollView>
   );
 };
-
-// class StoreProduct extends React.Component {
-//   render() {
-
-//   }
-// }
 
 const styles = StyleSheet.create({
   container: {

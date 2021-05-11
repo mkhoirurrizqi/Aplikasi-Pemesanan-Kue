@@ -47,6 +47,43 @@ const EditProduct = (props) => {
       });
   }, []);
 
+  const editProduct = () => {
+    fetch("https://pamparampam.herokuapp.com/api/editproduct", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: productId,
+        pd_name: productName,
+        pd_harga: price,
+        pd_berat: weight,
+        pd_jenis: jenis,
+        pd_expired: expired,
+        pd_desc: deskripsi,
+        pd_img: photo,
+        pd_status: status,
+      }),
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          console.log("Product updated");
+          return response.json();
+        } else {
+          console.log("Gagal update");
+        }
+      })
+      .then((responseJson) => {
+        console.log(responseJson);
+        props.navigation.navigate("StoreProduct");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   return (
     <ScrollView style={{ backgroundColor: "white" }}>
       <View style={{ flex: 1, alignItems: "center", paddingBottom: 50 }}>
@@ -73,12 +110,11 @@ const EditProduct = (props) => {
               }}
               dropDownStyle={{ backgroundColor: "white" }}
               onChangeItem={(item) => setStatus(...status, item.value)}
-              defaultValue={status}
             />
           </View>
         </View>
         <View style={styles.buttonWrapper}>
-          <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("StoreProduct")}>
+          <TouchableOpacity style={styles.button} onPress={editProduct}>
             <Text style={styles.buttonText}>Save</Text>
           </TouchableOpacity>
         </View>
