@@ -1,52 +1,82 @@
-import React,{useState} from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity, Image, StatusBar, ToastAndroid } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useSelector } from "react-redux";
 
-const HomeCustomer  = (props) => {
-  const [storeName, setStoreName] = useState("");
-  const [storeAddress, setStoreAddress] = useState("");
-    return (
-      <ScrollView style={{ backgroundColor: "white" }}>
-        <View style={styles.container}>
-          <Text style={styles.header}>Toko Parampam</Text>
-          <View style={styles.allStore}>
-            <View style={styles.store}>
-              <View style={styles.content}>
-                <View style={{ flex: 2, alignItems: "center", justifyContent: "center" }}>
-                  <MaterialCommunityIcons name="storefront" size={40} color={"#F57373"} />
-                </View>
-                <View style={{ flex: 10, justifyContent: "center" }}>
-                  <Text style={styles.storeName}>Toko Joko</Text>
-                  <Text style={styles.storeAddress}>Tanjung Senang, Tanjung Senang</Text>
-                </View>
-                <View style={{ flex: 4, alignItems: "center", justifyContent: "center" }}>
-                  <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("ListProduct")}>
-                    <Text style={styles.buttonText}>See Store</Text>
-                  </TouchableOpacity>
+const HomeCustomer = (props) => {
+  const token = useSelector((data) => data.user.token);
+  const [storeArray, setStoreArray] = useState([]);
+  // const [storeName, setStoreName] = useState("");
+  // const [storeKelurahan, setStoreKelurahan] = useState("");
+  // const [storeKecamatan, setStoreKecamatan] = useState("");
+  useEffect(() => {
+    fetch("https://pamparampam.herokuapp.com/api/alluser", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        type: "toko",
+      }),
+    })
+      .then(function (response) {
+        return response.json();
+      })
+      .then((responseJson) => {
+        setStoreArray([]);
+        responseJson.forEach((element) => {
+          setStoreArray((storeArray) => [
+            ...storeArray,
+            {
+              id: element.id,
+              name: element.name,
+              kelurahan: element.kelurahan,
+              kecamatan: element.kecamatan,
+            },
+          ]);
+        });
+        console.log(responseJson);
+        console.log(storeArray);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
+  return (
+    <ScrollView style={{ backgroundColor: "white" }}>
+      <View style={styles.container}>
+        <Text style={styles.header}>Toko Parampam</Text>
+        <View style={styles.allStore}>
+          {storeArray.map((store, i) => {
+            return (
+              <View style={styles.store} key={i}>
+                <View style={styles.content}>
+                  <View style={{ flex: 2, alignItems: "center", justifyContent: "center" }}>
+                    <MaterialCommunityIcons name="storefront" size={40} color={"#F57373"} />
+                  </View>
+                  <View style={{ flex: 10, justifyContent: "center" }}>
+                    <Text style={styles.storeName}>{store.name}</Text>
+                    <Text style={styles.storeAddress}>
+                      {store.kelurahan}, {store.kecamatan}
+                    </Text>
+                  </View>
+                  <View style={{ flex: 4, alignItems: "center", justifyContent: "center" }}>
+                    <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("ListProduct")}>
+                      <Text style={styles.buttonText}>See Store</Text>
+                    </TouchableOpacity>
+                  </View>
                 </View>
               </View>
-            </View>
-            <View style={styles.store}>
-              <View style={styles.content}>
-                <View style={{ flex: 2, alignItems: "center", justifyContent: "center" }}>
-                  <MaterialCommunityIcons name="storefront" size={40} color={"#F57373"} />
-                </View>
-                <View style={{ flex: 10, justifyContent: "center" }}>
-                  <Text style={styles.storeName}>Toko Pakde Mar</Text>
-                  <Text style={styles.storeAddress}>Way Kandis, Tanjung Senang</Text>
-                </View>
-                <View style={{ flex: 4, alignItems: "center", justifyContent: "center" }}>
-                  <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("ListProduct")}>
-                    <Text style={styles.buttonText}>See Store</Text>
-                  </TouchableOpacity>
-                </View>
-              </View>
-            </View>
-          </View>
+            );
+          })}
         </View>
-      </ScrollView>
-    );
-  }
+      </View>
+    </ScrollView>
+  );
+};
 const styles = StyleSheet.create({
   container: {
     paddingBottom: 50,
