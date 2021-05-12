@@ -9,50 +9,76 @@ export function ReactNativeNumberFormat({ value }) {
 const ListProduct = (props) => {
   const token = useSelector((data) => data.user.token);
   const [productArray, setProductArray] = useState("");
-  // const [cakename, setCakename] = useState("");
-  // const [kindofcake, setKindofcake] = useState("");
-  // const [price, setPrice] = useState("");
-  // const [storeId] = props.route.params;
-  // useEffect(() => {
-  //   fetch("https://pamparampam.herokuapp.com/api/storeproduct", {
-  //     method: "POST",
-  //     headers: {
-  //       Accept: "application/json",
-  //       Authorization: "Bearer " + token,
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({
-  //       user_id: storeId,
-  //     }),
-  //   })
-  //     .then(function (response) {
-  //       return response.json();
-  //     })
-  //     .then((responseJson) => {
-  //       setProductArray([]);
-  //       responseJson.forEach((element) => {
-  //         setProductArray((productArray) => [
-  //           ...productArray,
-  //           {
-  //             id: element.id,
-  //             name: element.pd_name,
-  //           },
-  //         ]);
-  //       });
-  //       console.log(responseJson);
-  //       console.log(storeId);
-  //       console.log(productArray);
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // }, []);
+  const { storeId } = props.route.params;
+  useEffect(() => {
+    fetch("https://pamparampam.herokuapp.com/api/storeproduct", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        user_id: storeId,
+      }),
+    })
+      .then(function (response) {
+        return response.json();
+      })
+      .then((responseJson) => {
+        setProductArray([]);
+        responseJson.forEach((element) => {
+          setProductArray((productArray) => [
+            ...productArray,
+            {
+              id: element.id,
+              name: element.pd_name,
+              jenis: element.pd_jenis,
+              price: element.pd_harga,
+              status: element.pd_status,
+            },
+          ]);
+        });
+        console.log(responseJson);
+        console.log(storeId);
+        // console.log(productArray);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
   return (
     <ScrollView style={{ backgroundColor: "white" }}>
-      {/* {console.log(storeId)} */}
       <View style={styles.container}>
         <View style={styles.allProduct}>
-          <View style={styles.product}>
+          {productArray
+            ? productArray.map((product, i) => {
+                return (
+                  <View style={styles.product} key={i}>
+                    <View style={styles.content}>
+                      <View style={{ flex: 2, alignItems: "center", justifyContent: "center" }}>
+                        <MaterialCommunityIcons name="cake" size={30} color={"#F57373"} />
+                      </View>
+                      <View style={{ flex: 7, justifyContent: "center" }}>
+                        <Text style={styles.CakeName}>{product.name} </Text>
+                        <Text style={styles.KindOfCake}>{product.jenis}</Text>
+                        <Text style={styles.Price}>
+                          <ReactNativeNumberFormat value={product.price} />
+                        </Text>
+                      </View>
+                      <View style={{ flex: 4, alignItems: "center", justifyContent: "center" }}>
+                        <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("DetailProduct")}>
+                          <Text style={styles.buttonText}>See Product</Text>
+                        </TouchableOpacity>
+                        <Text style={styles.information}>{product.status}</Text>
+                      </View>
+                    </View>
+                  </View>
+                );
+              })
+            : useEffect}
+          {}
+          {/* <View style={styles.product}>
             <View style={styles.content}>
               <View style={{ flex: 2, alignItems: "center", justifyContent: "center" }}>
                 <MaterialCommunityIcons name="cake" size={30} color={"#F57373"} />
@@ -75,126 +101,6 @@ const ListProduct = (props) => {
           <View style={styles.product}>
             <View style={styles.content}>
               <View style={{ flex: 2, alignItems: "center", justifyContent: "center" }}>
-                <MaterialCommunityIcons name="cake" size={30} color={"#F57373"} />
-              </View>
-              <View style={{ flex: 7, justifyContent: "center" }}>
-                <Text style={styles.CakeName}>Putri Salju</Text>
-                <Text style={styles.KindOfCake}>Kue Kering</Text>
-                <Text style={styles.Price}>
-                  <ReactNativeNumberFormat value={70000} />
-                </Text>
-              </View>
-              <View style={{ flex: 4, alignItems: "center", justifyContent: "center" }}>
-                <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("")}>
-                  <Text style={styles.buttonText}>See Product</Text>
-                </TouchableOpacity>
-                <Text style={styles.information}>Ready Stock</Text>
-              </View>
-            </View>
-          </View>
-          <View style={styles.product}>
-            <View style={styles.content}>
-              <View style={{ flex: 2, alignItems: "center", justifyContent: "center" }}>
-                <MaterialCommunityIcons name="cake" size={30} color={"#F57373"} />
-              </View>
-              <View style={{ flex: 7, justifyContent: "center" }}>
-                <Text style={styles.CakeName}>Kaastangels</Text>
-                <Text style={styles.KindOfCake}>Kue Kering</Text>
-                <Text style={styles.Price}>
-                  <ReactNativeNumberFormat value={70000} />
-                </Text>
-              </View>
-              <View style={{ flex: 4, alignItems: "center", justifyContent: "center" }}>
-                <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("")}>
-                  <Text style={styles.buttonText}>See Product</Text>
-                </TouchableOpacity>
-                <Text style={styles.information}>Ready Stock</Text>
-              </View>
-            </View>
-          </View>
-          <View style={styles.product}>
-            <View style={styles.content}>
-              <View style={{ flex: 2, alignItems: "center", justifyContent: "center" }}>
-                <MaterialCommunityIcons name="cake" size={30} color={"#F57373"} />
-              </View>
-              <View style={{ flex: 7, justifyContent: "center" }}>
-                <Text style={styles.CakeName}>Choco Chips &ensp;</Text>
-                <Text style={styles.KindOfCake}>Kue Kering</Text>
-                <Text style={styles.Price}>
-                  <ReactNativeNumberFormat value={70000} />
-                </Text>
-              </View>
-              <View style={{ flex: 4, alignItems: "center", justifyContent: "center" }}>
-                <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("")}>
-                  <Text style={styles.buttonText}>See Product</Text>
-                </TouchableOpacity>
-                <Text style={styles.information}>Ready Stock</Text>
-              </View>
-            </View>
-          </View>
-          <View style={styles.product}>
-            <View style={styles.content}>
-              <View style={{ flex: 2, alignItems: "center", justifyContent: "center" }}>
-                <MaterialCommunityIcons name="cake" size={30} color={"#F57373"} />
-              </View>
-              <View style={{ flex: 7, justifyContent: "center" }}>
-                <Text style={styles.CakeName}>Wafer Keju</Text>
-                <Text style={styles.KindOfCake}>Kue Kering</Text>
-                <Text style={styles.Price}>
-                  <ReactNativeNumberFormat value={70000} />
-                </Text>
-              </View>
-              <View style={{ flex: 4, alignItems: "center", justifyContent: "center" }}>
-                <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("")}>
-                  <Text style={styles.buttonText}>See Product</Text>
-                </TouchableOpacity>
-                <Text style={styles.information}>Ready Stock</Text>
-              </View>
-            </View>
-          </View>
-          <View style={styles.product}>
-            <View style={styles.content}>
-              <View style={{ flex: 2, alignItems: "center", justifyContent: "center" }}>
-                <MaterialCommunityIcons name="cake" size={30} color={"#F57373"} />
-              </View>
-              <View style={{ flex: 7, justifyContent: "center" }}>
-                <Text style={styles.CakeName}>Sagu Keju</Text>
-                <Text style={styles.KindOfCake}>Kue Kering</Text>
-                <Text style={styles.Price}>
-                  <ReactNativeNumberFormat value={70000} />
-                </Text>
-              </View>
-              <View style={{ flex: 4, alignItems: "center", justifyContent: "center" }}>
-                <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("")}>
-                  <Text style={styles.buttonText}>See Product</Text>
-                </TouchableOpacity>
-                <Text style={styles.information}>Ready Stock</Text>
-              </View>
-            </View>
-          </View>
-          <View style={styles.product}>
-            <View style={styles.content}>
-              <View style={{ flex: 2, alignItems: "center", justifyContent: "center" }}>
-                <MaterialCommunityIcons name="cake" size={30} color={"#808080"} />
-              </View>
-              <View style={{ flex: 7, justifyContent: "center" }}>
-                <Text style={styles.CakeName1}>Legit</Text>
-                <Text style={styles.KindOfCake1}>Kue Basah</Text>
-                <Text style={styles.Price1}>
-                  <ReactNativeNumberFormat value={70000} />
-                </Text>
-              </View>
-              <View style={{ flex: 4, alignItems: "center", justifyContent: "center" }}>
-                <TouchableOpacity style={styles.button1} onPress={() => props.navigation.navigate("")}>
-                  <Text style={styles.buttonText}>See Product</Text>
-                </TouchableOpacity>
-                <Text style={styles.information1}>Out Of Stock</Text>
-              </View>
-            </View>
-          </View>
-          <View style={styles.product}>
-            <View style={styles.content}>
-              <View style={{ flex: 2, alignItems: "center", justifyContent: "center" }}>
                 <MaterialCommunityIcons name="cake" size={30} color={"#808080"} />
               </View>
               <View style={{ flex: 7, justifyContent: "center" }}>
@@ -211,7 +117,7 @@ const ListProduct = (props) => {
                 <Text style={styles.information1}>Out Of Stock</Text>
               </View>
             </View>
-          </View>
+          </View> */}
         </View>
       </View>
     </ScrollView>
