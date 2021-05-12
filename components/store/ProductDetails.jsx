@@ -1,13 +1,29 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity, Image, StatusBar, ToastAndroid } from "react-native";
+import { StyleSheet, Text, View,RefreshControl, TextInput, ScrollView, TouchableOpacity, Image, StatusBar, ToastAndroid } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useSelector } from "react-redux";
 
+const wait = (timeout) => {
+  return new Promise(resolve => setTimeout(resolve, timeout));
+}
 const StoreProduct = (props) => {
+  const [refreshing, setRefreshing] = React.useState(false);
+
+  const onRefresh = React.useCallback(() => {
+    data();
+    setRefreshing(true);
+    wait(2000).then(() => setRefreshing(false));
+  }, []);
   const token = useSelector((data) => data.user.token);
   const [productArray, setProductArray] = useState([]);
   const id = useSelector((data) => data.user.id);
+  
+  
   useEffect(() => {
+    data();
+  }, []);
+
+  const data = () => {
     fetch("https://pamparampam.herokuapp.com/api/storeproduct", {
       method: "POST",
       headers: {
@@ -24,6 +40,7 @@ const StoreProduct = (props) => {
       })
       .then((responseJson) => {
         setProductArray([]);
+        if(responseJson !={}){
         responseJson.forEach((element) => {
           setProductArray((productArray) => [
             ...productArray,
@@ -33,6 +50,7 @@ const StoreProduct = (props) => {
             },
           ]);
         });
+      }
         console.log(responseJson);
         console.log(id);
         console.log(productArray);
@@ -40,7 +58,7 @@ const StoreProduct = (props) => {
       .catch((error) => {
         console.error(error);
       });
-  }, []);
+    }
 
   const deleteProduct = (productId) => {
     fetch("https://pamparampam.herokuapp.com/api/deleteproduct", {
@@ -50,9 +68,9 @@ const StoreProduct = (props) => {
         Authorization: "Bearer " + token,
         "Content-Type": "application/json",
       },
-      body: {
+      body: JSON.stringify({
         id: productId,
-      },
+      }),
     }).then((response) => {
       if (response.status === 200) {
         toastDeleteSucceed();
@@ -78,8 +96,14 @@ const StoreProduct = (props) => {
   const refresh = () => {};
 
   return (
-    <ScrollView style={{ backgroundColor: "white" }}>
+    <ScrollView style={{ backgroundColor: "white" }} refreshControl={
+      <RefreshControl
+        refreshing={refreshing}
+        onRefresh={onRefresh}
+      />
+    }>
       <View style={styles.container}>
+
         <View style={styles.allProduct}>
           <View style={styles.button2}>
             <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("AddProduct")}>

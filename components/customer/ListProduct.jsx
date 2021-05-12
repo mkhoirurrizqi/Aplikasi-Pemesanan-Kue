@@ -1,16 +1,31 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity, Image, StatusBar, ToastAndroid } from "react-native";
+import { StyleSheet, Text, View,RefreshControl, TextInput, ScrollView, TouchableOpacity, Image, StatusBar, ToastAndroid } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import NumberFormat from "react-number-format";
 import { useSelector } from "react-redux";
 export function ReactNativeNumberFormat({ value }) {
   return <NumberFormat value={value} displayType={"text"} thousandSeparator={"."} decimalSeparator={","} prefix={"Rp. "} renderText={(formattedValue) => <Text>{formattedValue}</Text>} />;
 }
+const wait = (timeout) => {
+  return new Promise(resolve => setTimeout(resolve, timeout));
+}
 const ListProduct = (props) => {
   const token = useSelector((data) => data.user.token);
   const [productArray, setProductArray] = useState("");
   const { storeId } = props.route.params;
+
+  const [refreshing, setRefreshing] = React.useState(false);
+
+  const onRefresh = React.useCallback(() => {
+    list_product();
+    setRefreshing(true);
+    wait(2000).then(() => setRefreshing(false));
+  }, []);
+
   useEffect(() => {
+    list_product();
+  }, []);
+  const list_product = () => {
     fetch("https://pamparampam.herokuapp.com/api/storeproduct", {
       method: "POST",
       headers: {
@@ -46,9 +61,17 @@ const ListProduct = (props) => {
       .catch((error) => {
         console.error(error);
       });
-  }, []);
+    }
+    const cekstatus = (status) => {
+      return (status == "Ready Stock");
+    }
   return (
-    <ScrollView style={{ backgroundColor: "white" }}>
+    <ScrollView style={{ backgroundColor: "white" }}  refreshControl={
+      <RefreshControl
+        refreshing={refreshing}
+        onRefresh={onRefresh}
+      />
+    }>
       <View style={styles.container}>
         <View style={styles.allProduct}>
           {productArray
@@ -57,17 +80,20 @@ const ListProduct = (props) => {
                   <View style={styles.product} key={i}>
                     <View style={styles.content}>
                       <View style={{ flex: 2, alignItems: "center", justifyContent: "center" }}>
-                        <MaterialCommunityIcons name="cake" size={30} color={"#F57373"} />
+                        <MaterialCommunityIcons name="cake" size={30} color={(cekstatus(product.status)) ? "#F57373" : "#808080"} />
                       </View>
                       <View style={{ flex: 7, justifyContent: "center" }}>
-                        <Text style={styles.CakeName}>{product.name} </Text>
-                        <Text style={styles.KindOfCake}>{product.jenis}</Text>
-                        <Text style={styles.Price}>
+                        <Text style={[(cekstatus(product.status)) ? styles.CakeName : styles.CakeName1 ]}>{product.name} </Text>
+                        <Text style={[(cekstatus(product.status)) ? styles.KindOfCake : styles.KindOfCake1]}>{product.jenis}</Text>
+                        <Text style={[(cekstatus(product.status)) ? styles.Price : styles.Price1]}>
                           <ReactNativeNumberFormat value={product.price} />
                         </Text>
                       </View>
                       <View style={{ flex: 4, alignItems: "center", justifyContent: "center" }}>
-                        <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("DetailProduct")}>
+                        <TouchableOpacity style={[(cekstatus(product.status)) ? styles.button : styles.button1]} onPress={() => props.navigation.navigate("DetailProduct", {
+                          pdId: product.id,
+                        })
+                      }>
                           <Text style={styles.buttonText}>See Product</Text>
                         </TouchableOpacity>
                         <Text style={styles.information}>{product.status}</Text>

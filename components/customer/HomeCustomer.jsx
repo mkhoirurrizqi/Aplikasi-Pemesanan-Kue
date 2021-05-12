@@ -1,49 +1,67 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity, Image, StatusBar, ToastAndroid } from "react-native";
+import { StyleSheet, Text, View,RefreshControl, TextInput, ScrollView, TouchableOpacity, Image, StatusBar, ToastAndroid } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useSelector } from "react-redux";
+
+const wait = (timeout) => {
+  return new Promise(resolve => setTimeout(resolve, timeout));
+}
 
 const HomeCustomer = (props) => {
   const token = useSelector((data) => data.user.token);
   const [storeArray, setStoreArray] = useState([]);
-  useEffect(() => {
-    fetch("https://pamparampam.herokuapp.com/api/alluser", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        Authorization: "Bearer " + token,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        type: "toko",
-      }),
-    })
-      .then(function (response) {
-        return response.json();
-      })
-      .then((responseJson) => {
-        setStoreArray([]);
-        responseJson.forEach((element) => {
-          setStoreArray((storeArray) => [
-            ...storeArray,
-            {
-              id: element.id,
-              name: element.name,
-              kelurahan: element.kelurahan,
-              kecamatan: element.kecamatan,
-            },
-          ]);
-        });
-        console.log(responseJson);
-        console.log(storeArray);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
+  const [refreshing, setRefreshing] = React.useState(false);
 
+  const onRefresh = React.useCallback(() => {
+    listtoko();
+    setRefreshing(true);
+    wait(2000).then(() => setRefreshing(false));
+  }, []);
+  useEffect(() => {
+    listtoko();
+  }, []);
+  const listtoko = () => {
+  fetch("https://pamparampam.herokuapp.com/api/alluser", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      Authorization: "Bearer " + token,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      type: "toko",
+    }),
+  })
+    .then(function (response) {
+      return response.json();
+    })
+    .then((responseJson) => {
+      setStoreArray([]);
+      responseJson.forEach((element) => {
+        setStoreArray((storeArray) => [
+          ...storeArray,
+          {
+            id: element.id,
+            name: element.name,
+            kelurahan: element.kelurahan,
+            kecamatan: element.kecamatan,
+          },
+        ]);
+      });
+      console.log(responseJson);
+      console.log(storeArray);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  }
   return (
-    <ScrollView style={{ backgroundColor: "white" }}>
+    <ScrollView style={{ backgroundColor: "white" }} refreshControl={
+      <RefreshControl
+        refreshing={refreshing}
+        onRefresh={onRefresh}
+      />
+    }>
       <View style={styles.container}>
         <Text style={styles.header}>Toko Parampam</Text>
         <View style={styles.allStore}>

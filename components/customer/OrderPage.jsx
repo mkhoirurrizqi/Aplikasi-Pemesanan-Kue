@@ -1,8 +1,49 @@
-import React from "react";
-import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity, Image, StatusBar, ToastAndroid } from "react-native";
+import React, { useState, useEffect } from "react";
+import { StyleSheet, Text, View, Linking, ScrollView, TouchableOpacity } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-
+import { useSelector } from "react-redux";
 const Order  = (props) => {
+  const token = useSelector((data) => data.user.token);
+  const { userId ,productName} = props.route.params;
+  const [name, setName] = useState("");
+  const [whatsapp, setWhatsapp] = useState("");
+  useEffect(() => {
+    fetch('https://pamparampam.herokuapp.com/api/gettoko',{
+      method:'POST',
+      headers: {
+        Accept: 'application/json',
+        'Authorization': 'Bearer ' + token,
+      'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        user_id: userId,
+      }),
+    })  
+    .then(function(response) {
+      return response.json()
+    }).then((responseJson) => {
+      console.log(responseJson); 
+      setWhatsapp(responseJson.whatsapp);
+      setName(responseJson.name);
+    }).catch(error => {
+      console.error(error);
+    });
+},[]);
+
+const initiateWhatsApp = () => {
+ 
+  let url =
+    'whatsapp://send?text=' + 
+    "Halo, Saya ingin Pesan Kue ini , "+productName+
+    '&phone=62' + whatsapp;
+  Linking.openURL(url)
+    .then((data) => {
+      console.log('WhatsApp Opened');
+    })
+    .catch(() => {
+      alert('Make sure Whatsapp installed on your device');
+    });
+};
     return (
       <ScrollView style={{ backgroundColor: "white" }}>
         <View style={styles.container}>
@@ -10,10 +51,10 @@ const Order  = (props) => {
             <MaterialCommunityIcons name="storefront" size={240} color="#F57373" />
           </View>
           <View style={styles.nameWrapper}>
-            <Text style={styles.name}>Toko Joko</Text>
+            <Text style={styles.name}>{name}</Text>
           </View>
           <View style={styles.buttonWrapper}>
-            <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("")}>
+            <TouchableOpacity style={styles.button} onPress={initiateWhatsApp}>
                 <View style={styles.row}>
                     <View style={{ alignItems: "center", justifyContent: "center" }}>
                         <MaterialCommunityIcons name="whatsapp" size={25} color="#FFFFFF" />
