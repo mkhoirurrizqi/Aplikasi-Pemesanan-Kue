@@ -6,9 +6,6 @@ import { useSelector } from "react-redux";
 const HomeCustomer = (props) => {
   const token = useSelector((data) => data.user.token);
   const [storeArray, setStoreArray] = useState([]);
-  // const [storeName, setStoreName] = useState("");
-  // const [storeKelurahan, setStoreKelurahan] = useState("");
-  // const [storeKecamatan, setStoreKecamatan] = useState("");
   useEffect(() => {
     fetch("https://pamparampam.herokuapp.com/api/alluser", {
       method: "POST",
@@ -64,7 +61,14 @@ const HomeCustomer = (props) => {
                     </Text>
                   </View>
                   <View style={{ flex: 4, alignItems: "center", justifyContent: "center" }}>
-                    <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("ListProduct")}>
+                    <TouchableOpacity
+                      style={styles.button}
+                      onPress={() =>
+                        props.navigation.navigate("ListProduct", {
+                          storeId: store.id,
+                        })
+                      }
+                    >
                       <Text style={styles.buttonText}>See Store</Text>
                     </TouchableOpacity>
                   </View>

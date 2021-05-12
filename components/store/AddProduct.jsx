@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Alert,TextInput, ScrollView, TouchableOpacity, Image, StatusBar, ToastAndroid } from "react-native";
+import { StyleSheet, Text, View, Alert, TextInput, ScrollView, TouchableOpacity, Image, StatusBar, ToastAndroid } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
-import {  useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 
 const AddProduct = (props) => {
-  const token = useSelector(data => data.user.token);
+  const token = useSelector((data) => data.user.token);
   const [status, setStatus] = useState("");
   const [productName, setProductName] = useState("");
   const [price, setPrice] = useState("");
@@ -12,43 +12,40 @@ const AddProduct = (props) => {
   const [jenis, setJenis] = useState("");
   const [expired, setExpired] = useState("");
   const [deskripsi, setDeskripsi] = useState("");
-  const [photo, setPhoto] = useState("");
-  const addproductpost =() => {
-  
-    fetch('https://pamparampam.herokuapp.com/api/addproduct', {
-        method: 'POST',
-        headers: {
-                  Accept: 'application/json',
-                  'Authorization': 'Bearer ' + token,
-                'Content-Type': 'application/json'
-                },
-        body: JSON.stringify({
-          pd_img: photo,
-          pd_name: productName,
-          pd_harga: price,
-          pd_berat: weight,
-          pd_expired: expired,
-          pd_jenis: jenis,
-          pd_desc: deskripsi,
-          pd_status: status
-          })
-        })
-        .then((response) => {
-          if (response.status === 201) {
-            return response.json()
-          } else {
-            Alert.alert('AddProduct Gagal');
-            throw new Error('Something went wrong on api server!');
-          }
-        })
-        .then((responseJson) => {
-          console.log(responseJson);
-          props.navigation.navigate("StoreProduct")
-        }).catch(error => {
+  const addproductpost = () => {
+    fetch("https://pamparampam.herokuapp.com/api/addproduct", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        pd_name: productName,
+        pd_harga: price,
+        pd_berat: weight,
+        pd_expired: expired,
+        pd_jenis: jenis,
+        pd_desc: deskripsi,
+        pd_status: status,
+      }),
+    })
+      .then((response) => {
+        if (response.status === 201) {
+          return response.json();
+        } else {
+          console.log(response.status);
+          console.log(token);
+          throw new Error("Something went wrong on api server!");
+        }
+      })
+      .then((responseJson) => {
+        console.log(responseJson);
+        props.navigation.navigate("StoreProduct");
+      })
+      .catch((error) => {
         console.error(error);
       });
-      
-   
   };
   return (
     <ScrollView style={{ backgroundColor: "white" }}>
@@ -60,7 +57,6 @@ const AddProduct = (props) => {
           <TextInput style={styles.textInput} onChangeText={(jenis) => setJenis(jenis)} value={jenis} placeholder="Jenis" placeholderTextColor="grey" />
           <TextInput style={styles.textInput} onChangeText={(expired) => setExpired(expired)} value={expired} placeholder="Expired" placeholderTextColor="grey" />
           <TextInput style={styles.textareaInput} multiline={true} numberOfLines={6} onChangeText={(deskripsi) => setDeskripsi(deskripsi)} value={deskripsi} placeholder="Type the description here ..." placeholderTextColor="grey" />
-          <TextInput style={styles.textInput} onChangeText={(photo) => setPhoto(photo)} value={photo} placeholder="Choose File " placeholderTextColor="grey" />
 
           <View style={styles.dropdownWrapper}>
             <DropDownPicker
@@ -75,7 +71,7 @@ const AddProduct = (props) => {
                 justifyContent: "flex-start",
               }}
               dropDownStyle={{ backgroundColor: "white" }}
-              onChangeItem={(item) => setStatus(...status, item.value)}
+              onChangeItem={(item) => setStatus(item.value)}
             />
           </View>
         </View>

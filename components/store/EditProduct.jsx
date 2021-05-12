@@ -12,7 +12,6 @@ const EditProduct = (props) => {
   const [jenis, setJenis] = useState("");
   const [expired, setExpired] = useState("");
   const [deskripsi, setDeskripsi] = useState("");
-  const [photo, setPhoto] = useState("");
   const { productId } = props.route.params;
 
   useEffect(() => {
@@ -39,7 +38,6 @@ const EditProduct = (props) => {
         setJenis(responseJson.pd_jenis);
         setExpired(responseJson.pd_expired);
         setDeskripsi(responseJson.pd_desc);
-        setPhoto(responseJson.pd_img);
         setStatus(responseJson.pd_status);
       })
       .catch((error) => {
@@ -63,7 +61,6 @@ const EditProduct = (props) => {
         pd_jenis: jenis,
         pd_expired: expired,
         pd_desc: deskripsi,
-        pd_img: photo,
         pd_status: status,
       }),
     })
@@ -94,7 +91,6 @@ const EditProduct = (props) => {
           <TextInput style={styles.textInput} onChangeText={(jenis) => setJenis(jenis)} value={jenis} placeholder="Jenis" placeholderTextColor="grey" />
           <TextInput style={styles.textInput} onChangeText={(expired) => setExpired(expired)} value={expired} placeholder="Expired" placeholderTextColor="grey" />
           <TextInput style={styles.textareaInput} multiline={true} numberOfLines={6} onChangeText={(deskripsi) => setDeskripsi(deskripsi)} value={deskripsi} placeholder="Type the description here ..." placeholderTextColor="grey" />
-          <TextInput style={styles.textInput} onChangeText={(photo) => setPhoto(photo)} value={photo} placeholder="Choose File " placeholderTextColor="grey" />
 
           <View style={styles.dropdownWrapper}>
             <DropDownPicker
@@ -109,7 +105,7 @@ const EditProduct = (props) => {
                 justifyContent: "flex-start",
               }}
               dropDownStyle={{ backgroundColor: "white" }}
-              onChangeItem={(item) => setStatus(...status, item.value)}
+              onChangeItem={(item) => setStatus(item.value)}
             />
           </View>
         </View>
