@@ -13,6 +13,9 @@ const AddProduct = (props) => {
   const [expired, setExpired] = useState("");
   const [deskripsi, setDeskripsi] = useState("");
   const addproductpost = () => {
+     if(deskripsi == "" || productName== ""||price == ""||expired == ""||weight == ""||jenis == ""||status == ""){
+      Alert.alert('Ada field kosong');
+    }else{
     fetch("https://pamparampam.herokuapp.com/api/addproduct", {
       method: "POST",
       headers: {
@@ -46,6 +49,7 @@ const AddProduct = (props) => {
       .catch((error) => {
         console.error(error);
       });
+    }
   };
   return (
     <ScrollView style={{ backgroundColor: "white" }}>

@@ -46,7 +46,10 @@ const EditProduct = (props) => {
   }, []);
 
   const editProduct = () => {
-    fetch("https://pamparampam.herokuapp.com/api/editproduct", {
+    if(deskripsi == "" || productName== ""||price == ""||expired == ""||weight == ""||jenis == ""||status == ""){
+      Alert.alert('Ada field kosong');
+    }else{
+      fetch("https://pamparampam.herokuapp.com/api/editproduct", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -79,6 +82,7 @@ const EditProduct = (props) => {
       .catch((error) => {
         console.error(error);
       });
+    }
   };
 
   return (

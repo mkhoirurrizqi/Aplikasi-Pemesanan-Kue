@@ -41,6 +41,8 @@ const EditProfile = (props) => {
   const edituserpost =() => {
     if(password != confirm_password){
       Alert.alert('Password dan Re-password tidak sama');
+    }else if(password == ""){
+      Alert.alert('Password tidak boleh kosong');
     }else{
     fetch('https://pamparampam.herokuapp.com/api/edituser', {
         method: 'POST',

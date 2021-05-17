@@ -34,12 +34,12 @@ const Splash = ({navigation}) => {
                     props.navigation.navigate("HomeCustomer")
                   } 
         }
-        },4000)
+        },1000)
     },[navigation]);
     return (
         <View style={styles.container}>
             <TouchableOpacity style={styles.container} onPress={() => navigation.replace("Login")}>
-            <Text style={styles.text}>PAMPARAMPAM</Text>
+            <Text style={styles.text}>NAKA</Text>
             <Text style={styles.text1}>Aplikasi Pemesanan kue</Text>
         </TouchableOpacity>
         </View>

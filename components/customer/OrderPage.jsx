@@ -22,16 +22,18 @@ const Order  = (props) => {
     .then(function(response) {
       return response.json()
     }).then((responseJson) => {
-      console.log(responseJson); 
-      setWhatsapp(responseJson.whatsapp);
-      setName(responseJson.name);
+      console.log(responseJson[0]); 
+      console.log(responseJson[0].whatsapp); 
+      setWhatsapp(responseJson[0].whatsapp);
+      setName(responseJson[0].name);
     }).catch(error => {
       console.error(error);
     });
 },[]);
 
 const initiateWhatsApp = () => {
- 
+  //console.log(whatsapp);
+ if(whatsapp){
   let url =
     'whatsapp://send?text=' + 
     "Halo, Saya ingin Pesan Kue ini , "+productName+
@@ -43,6 +45,9 @@ const initiateWhatsApp = () => {
     .catch(() => {
       alert('Make sure Whatsapp installed on your device');
     });
+  }else{
+    useEffect;
+  }
 };
     return (
       <ScrollView style={{ backgroundColor: "white" }}>
@@ -54,6 +59,7 @@ const initiateWhatsApp = () => {
             <Text style={styles.name}>{name}</Text>
           </View>
           <View style={styles.buttonWrapper}>
+  
             <TouchableOpacity style={styles.button} onPress={initiateWhatsApp}>
                 <View style={styles.row}>
                     <View style={{ alignItems: "center", justifyContent: "center" }}>
@@ -64,6 +70,7 @@ const initiateWhatsApp = () => {
               </View>
               </View>
             </TouchableOpacity>
+
         </View>
         </View>
       </ScrollView>
