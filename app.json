@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "aplikasi-sistem-pemesanan-kue",
-    "slug": "aplikasi-sistem-pemesanan-kue",
+    "name": "NAKA",
+    "slug": "NAKA",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#F57373"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -20,9 +20,11 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "com.pamparampam.pamparampam",
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "backgroundColor": "#F57373"
       }
     },
     "web": {
