@@ -39,7 +39,10 @@ const EditProfile = (props) => {
       });
   },[]);
   const edituserpost =() => {
-    if(password != confirm_password){
+    if(name == ""|| username == ""|| whatsapp == ""|| email== "" ||kecamatan == ""||kelurahan == ""){
+      Alert.alert('Ada Field kosong');
+    }
+    else if(password != confirm_password){
       Alert.alert('Password dan Re-password tidak sama');
     }else if(password == ""){
       Alert.alert('Password tidak boleh kosong');
