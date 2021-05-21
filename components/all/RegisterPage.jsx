@@ -12,7 +12,10 @@ const Register  = (props) => {
   const [password, setPassword] = useState("");
   const [confirm_password, setConfirm_pasword] = useState("");
   const registerpost =() => {
-    if(password != confirm_password){
+    if(name == ""|| username == ""|| whatsapp == ""|| email== "" ||kecamatan == ""||kelurahan == ""){
+      Alert.alert('Ada Field kosong');
+    }
+    else if(password != confirm_password){
       Alert.alert('Password dan Re-password tidak sama');
     }else if(password == ""){
       Alert.alert('Password tidak boleh kosong');
